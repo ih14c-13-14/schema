@@ -3,31 +3,604 @@ info:
   title: API Title
   version: '1.0'
 servers:
-- url: "http://localhost:3000"
+- url: "http://localhost:3000/api/v1"
   description: "ローカル環境"
 - url: "https://server.test/api/v1"
   description: "本番環境"
+
+tags:
+  - name: auth
+    description: JWT情報
+  - name: users
+    description: ユーザ情報
+  - name: arts
+    description: アート情報
+  - name: stamps
+    description: stamp情報
+  - name: QR
+    description: QR関連
+
 paths:
-  /login:
+  /auth/login:
     post:
+      tags:
+        - auth
+      summary: ユーザーログイン
+      description: メールアドレスとパスワードを使用してユーザーをログインします。
+      requestBody:
+        $ref: '#/components/requestBodies/LoginRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/LoginResponse'          
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /auth/signup:
+    post:
+      tags:
+        - auth
+      summary: 会員登録
+      description: 以下のパラメータを登録
+      requestBody:
+        $ref: '#/components/requestBodies/SignUpRequestBody'
       responses:
         '200':
           description: OK
-        '400':
-          description: Bad Request
-  /signup:
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /auth/signout:
     post:
+      tags:
+        - auth
       responses:
         '200':
           description: OK
-        '400':
-          description: Bad Request
-  /logout:
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
+  /users/email-change/{user_id}:
     post:
+      summary: メールアドレス変更
+      description: 新しいメールアドレスに変更する。
+      tags:
+        - users
+      security:
+      - Bearer: []
+      parameters:
+      - $ref: '#/components/parameters/userid'
+      requestBody:
+        $ref: '#/components/requestBodies/EmailChangeRequestBody'
       responses:
         '200':
-          description: OK
-        '400':
-          description: Bad Request
+          $ref: '#/components/responses/UpdateSuccessRequestResponse'          
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /users/password-change/{user_id}:
+    post:
+      summary: パスワード変更
+      description: 新しいパスワードに変更する。
+      tags:
+        - users
+      security:
+      - Bearer: []
+      parameters:
+      - $ref: '#/components/parameters/userid'
+      requestBody:
+        $ref: '#/components/requestBodies/PasswordChangeRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSuccessRequestResponse' 
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /users/others-change/{user_id}:
+    post:
+      summary: 他情報変更
+      description: 年齢、都道府県、性別の変更を行う。
+      tags:
+        - users
+      security:
+      - Bearer: []
+      parameters:
+      - $ref: '#/components/parameters/userid'
+      requestBody:
+        $ref: '#/components/requestBodies/OthersChangeRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSuccessRequestResponse' 
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
+  /arts:
+    get:
+      summary: 作品を取得する。
+      description: すべての作品を取得する。
+      tags:
+        - arts
+      responses:
+        '200':
+          $ref: '#/components/responses/ArtsResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /arts/author:
+    get:
+      summary: 作者の作品を取得する。
+      description: 作者の「あいうえお」順にして返す。
+      tags:
+        - arts
+      responses:
+        '200':
+          $ref: '#/components/responses/ArtsResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /arts/save/{user_id}:
+    get:
+      summary: ユーザが保存した作品を取得する。
+      description: ユーザIDを渡し、保存した作品を返す。
+      tags:
+        - arts
+      security:
+      - Bearer: []
+      parameters:
+      - $ref: '#/components/parameters/userid'
+      responses:
+        '200':
+          $ref: '#/components/responses/ArtsResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
+  /stamps/{user_id}:
+    get:
+      summary: スタンプを取得する。
+      description: ユーザのスタンプを地域ごとに取得する。
+      tags:
+        - stamps
+      security:
+      - Bearer: []
+      parameters:
+      - $ref: '#/components/parameters/userid'
+      responses:
+        '200':
+          $ref: '#/components/responses/StampsResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
+components:
+  parameters:
+    userid:
+      name: userId
+      in: path
+      description: ユーザID
+      required: true
+      schema:
+        type: string
+        example: 12345     
+    email:
+      name: email
+      in: path
+      description: メールアドレス
+      required: true
+      schema:
+        type: string
+        example: example@example.com
+    password:
+      name: password
+      in: path
+      description: パスワード
+      required: true
+      schema:
+        type: string
+        example: password
+    confirm-password:
+      name: confirmPassword
+      in: path
+      description: password確認
+      required: true
+      schema:
+        type: string
+        example: password
+    age-group:
+      name: ageGroup
+      in: path
+      description: 年齢範囲
+      required: true
+      schema:
+        type: integer
+        example: 1
+    gender:
+      name: gender
+      in: path
+      description: 性別
+      required: true
+      schema:
+        type: integer
+        example: 1
+    prefectures:
+      name: prefectures
+      in: path
+      description: 都道府県
+      required: true
+      schema:
+        type: integer
+        example: 1
+
+  requestBodies:
+    LoginRequestBody:
+      description: loign user
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginModel'
+
+    SignUpRequestBody:
+      description: Signup user
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SignUpModel'
+
+    EmailChangeRequestBody:
+      description: email change
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailChangeModel'
+
+    PasswordChangeRequestBody:
+      description: password change
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PasswordChangeModel'
+
+    OthersChangeRequestBody:
+      description: その他情報変更
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OthersChangeModel'
+
+  schemas:
+    LoginModel:
+      description: Login Model
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          $ref: '#/components/parameters/email'
+        password:
+          $ref: '#/components/parameters/password'
+
+    SignUpModel:
+      description: SignUp Model
+      required:
+        - email
+        - password
+        - confirm-password
+        - age-group
+        - gender
+        - prefectures
+      type: object
+      properties:
+        email:
+          $ref: '#/components/parameters/email'
+        password:
+          $ref: '#/components/parameters/password'
+        confirm-password:
+          $ref: '#/components/parameters/confirm-password'
+        age-group: 
+          $ref: '#/components/parameters/age-group'
+        gender:
+          $ref: '#/components/parameters/gender'
+        prefectures:
+          $ref: '#/components/parameters/prefectures'
+
+    PasswordChangeModel:
+      description: password change Model
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          $ref: '#/components/parameters/password'
+
+    EmailChangeModel:
+      description: email change Model
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          $ref: '#/components/parameters/email'
+    
+    OthersChangeModel:
+      description: other change Model
+      required:
+        - gender
+        - age-group
+        - prefectures
+      type: object
+      properties:
+        gender:
+          $ref: '#/components/parameters/gender'
+        age-group:
+          $ref: '#/components/parameters/age-group'
+        prefectures:
+          $ref: '#/components/parameters/prefectures'
+
+    ArtsModel:
+      description: Response Arts Model.
+      type: object
+      properties:
+        authors.name:
+          type: string
+          example: レアンドロ・エルリッヒ
+        authors.name_kana:
+          type: string
+          example: レアンドロ・エルリッヒ
+        arts.created_year:
+          type: integer
+          example: 2023
+        arts.is_public:
+          type: boolean
+          example: true
+        arts.name:
+          type: string
+          example: 空の池
+        arts.name_kana:
+          type: string
+          example: そらのいけ
+        arts.address:
+          type: string
+          example: 越後妻有里山現代美術館
+        arts.description:
+          type: string
+          example: キナーレの中央にある回路に囲まれた大きな池の水面に光が反射し、空や建物を鏡のように移している。
+        arts.image_path:
+          type: string
+          example: xxxxxx
+        arts.start_date:
+          type: string
+          example: 2023/06/13
+        arts.end_date:
+          type: string
+          example: 2024/06/13
+        arts.closin_day:
+          type: string
+          example: 2024/06/13
+        area.name:
+          type: string
+          example: KSG
+
+    StampsModel:
+      description: Response Arts Model.
+      type: object
+      properties:
+        authors.name:
+          type: string
+          example: レアンドロ・エルリッヒ
+        authors.name_kana:
+          type: string
+          example: レアンドロ・エルリッヒ
+        arts.created_year:
+          type: integer
+          example: 2023
+        arts.is_public:
+          type: boolean
+          example: true
+        arts.name:
+          type: string
+          example: 空の池
+        arts.name_kana:
+          type: string
+          example: そらのいけ
+        arts.address:
+          type: string
+          example: 越後妻有里山現代美術館
+        arts.description:
+          type: string
+          example: キナーレの中央にある回路に囲まれた大きな池の水面に光が反射し、空や建物を鏡のように移している。
+        arts.image_path:
+          type: string
+          example: xxxxxx
+        arts.start_date:
+          type: string
+          example: 2023/06/13
+        arts.end_date:
+          type: string
+          example: 2024/06/13
+        arts.closin_day:
+          type: string
+          example: 2024/06/13
+        area.name:
+          type: string
+          example: KSG
+        count(*):
+          type: integer
+          example: 10
+
+    UpdateSuccessModel:
+      description: 更新成功
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          title: code
+          type: string
+          example: 201
+        message:
+          title: message
+          type: string
+          example: 成功
+
+    ErrorModel:
+      description: Response Error Model.
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          title: error code
+          type: string
+          example: 500
+        message:
+          title: error message
+          type: string
+          example: Internal Server Error.
   
-  
+  responses:
+    LoginResponse:
+      description: ログイン成功
+      content:
+        application/json:
+          schema:
+            properties:
+              access_token:
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhvcml0aWVzIjpbXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+              token_type:
+                type: string
+                example: Bearer
+              expires_in:
+                type: integer
+                example: 3600
+    
+    ArtsResponse:
+      description: 作品情報を返す。
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ArtsModel'
+
+    StampsResponse:
+      description: スタンプの個数と作品情報を返す。
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/StampsModel'
+    
+    UpdateSuccessRequestResponse:
+      description: 更新成功のレスポンス
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/UpdateSuccessModel'
+
+    BadRequestResponse:
+      description: | 
+        Bad Request.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ErrorModel'
+            properties:
+              code:
+                example: 400
+              message:
+                example: Bad Request.
+    UnauthorizedResponse:
+      description: | 
+        Unauthorized.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ErrorModel'
+            properties:
+              code:
+                example: 401
+              message:
+                example: Unauthorized.
+    ForbiddenResponse:
+      description: | 
+        Forbidden.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ErrorModel'
+            properties:
+              code:
+                example: 403
+              message:
+                example: Forbidden.
+    NotFoundResponse:
+      description: | 
+        Not Found.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ErrorModel'
+            properties:
+              code:
+                example: 404
+              message:
+                example: Not Found.
+    ConflictErrorResponse:
+      description: | 
+        Conflict.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ErrorModel'
+            properties:
+              code:
+                example: 409
+              message:
+                example: Conflict.
+    InternalServerErrorResponse:
+      description: |-
+        Internal Server Error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Credentials or access token for API
