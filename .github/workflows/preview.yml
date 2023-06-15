@@ -1,0 +1,88 @@
+name: Publish API Docs for PR
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+      - labeled
+      - unlabeled
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy-url: ${{ steps.publish.outputs.url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - run: |
+          git clone https://github.com/swagger-api/swagger-ui.git --depth 1 && \
+          mv swagger-ui/dist/* ./docs/ && \
+          rm -rf swagger-ui && \
+          sed -i -e '/<\/body>/i\
+          <script>\
+            window.onload = () => {\
+              window.ui = SwaggerUIBundle({\
+                url: ".\/openapi.yml",\
+                dom_id: "#swagger-ui",\
+                presets: [\
+                  SwaggerUIBundle.presets.apis,\
+                  SwaggerUIStandalonePreset\
+                ],\
+                layout: "StandaloneLayout",\
+              });\
+            };\
+          <\/script>' ./docs/index.html && \
+          cp ./openapi/openapi.yml ./docs/openapi.yml
+      - name: Publish to Cloudflare Pages
+        id: publish
+        uses: cloudflare/pages-action@1
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: artist-oas
+          directory: ./docs
+  Notify:
+    needs:
+      - Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify
+        run: |
+          curl -X POST ${{ secrets.SWAGGERUI_NOTIFY_ENDPOINT }} \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "embeds": [
+                    {
+                      "title": "${{ github.event.pull_request.title }}",
+                      "url": "${{ github.event.pull_request.html_url }}",
+                      "fields": [
+                        {
+                          "name": "Pull Request",
+                          "value": "[URL](${{ github.event.pull_request.html_url }})",
+                          "inline": true
+                        },
+                        {
+                          "name": "Swagger UI",
+                          "value": "[URL](${{ needs.Publish.outputs.deploy-url }})",
+                          "inline": true
+                        },
+                        {
+                          "name": "User",
+                          "value": "${{ github.event.pull_request.user.login }}",
+                          "inline": true
+                        },
+                        {
+                          "name": "Branch",
+                          "value": "${{ github.head_ref }}",
+                          "inline": true
+                        }
+                      ]
+                    }
+                  ]
+                }'
