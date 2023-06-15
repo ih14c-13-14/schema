@@ -1,0 +1,30 @@
+name: Validate
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+      - labeled
+      - unlabeled
+
+jobs:
+  Validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v2
+        # 2回目以降エラーが出るが問題なし
+        continue-on-error: true
+      - name: asdf install
+        uses: asdf-vm/actions/install@v2
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Validate
+        run: yarn validate
