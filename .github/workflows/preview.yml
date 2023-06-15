@@ -54,7 +54,7 @@ jobs:
     steps:
       - name: Notify
         run: |
-          curl -X POST ${{ secrets.DEPLOY_NOTIFY_ENDPOINT }} \
+          curl -X POST ${{ secrets.SWAGGERUI_NOTIFY_ENDPOINT }} \
             -H "Content-Type: application/json" \
             -d '{
                   "embeds": [
