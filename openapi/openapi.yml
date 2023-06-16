@@ -4,8 +4,6 @@ info:
   version: 1.0.1
 servers:
 # Added by API Auto Mocking Plugin
-- description: SwaggerHub API Auto Mocking
-  url: https://virtserver.swaggerhub.com/SIROHA323/ARtist/1.0.1
 - url: "http://localhost:3000/api/v1"
   description: "ローカル環境"
 - url: "https://server.test/api/v1"
