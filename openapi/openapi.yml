@@ -1,8 +1,11 @@
 openapi: '3.0.2'
 info:
   title: API Title
-  version: '1.0'
+  version: 1.0.1
 servers:
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/SIROHA323/ARtist/1.0.1
 - url: "http://localhost:3000/api/v1"
   description: "ローカル環境"
 - url: "https://server.test/api/v1"
@@ -21,17 +24,17 @@ tags:
     description: QR関連
 
 paths:
-  /auth/login:
+  /auth/signin:
     post:
       tags:
         - auth
       summary: ユーザーログイン
       description: メールアドレスとパスワードを使用してユーザーをログインします。
       requestBody:
-        $ref: '#/components/requestBodies/LoginRequestBody'
+        $ref: '#/components/requestBodies/SigninRequestBody'
       responses:
         '200':
-          $ref: '#/components/responses/LoginResponse'          
+          $ref: '#/components/responses/SigninResponse'          
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '500':
@@ -138,6 +141,7 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+
   /arts/author:
     get:
       summary: 作者の作品を取得する。
@@ -151,6 +155,7 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+
   /arts/save/{user_id}:
     get:
       summary: ユーザが保存した作品を取得する。
@@ -194,13 +199,13 @@ paths:
 components:
   parameters:
     userid:
-      name: userId
+      name: user_id
       in: path
       description: ユーザID
       required: true
       schema:
         type: string
-        example: 12345     
+        example: 'hello world'
     email:
       name: email
       in: path
@@ -213,14 +218,6 @@ components:
       name: password
       in: path
       description: パスワード
-      required: true
-      schema:
-        type: string
-        example: password
-    confirm-password:
-      name: confirmPassword
-      in: path
-      description: password確認
       required: true
       schema:
         type: string
@@ -251,13 +248,13 @@ components:
         example: 1
 
   requestBodies:
-    LoginRequestBody:
-      description: loign user
+    SigninRequestBody:
+      description: signin user
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/LoginModel'
+            $ref: '#/components/schemas/SigninModel'
 
     SignUpRequestBody:
       description: Signup user
@@ -292,8 +289,8 @@ components:
             $ref: '#/components/schemas/OthersChangeModel'
 
   schemas:
-    LoginModel:
-      description: Login Model
+    SigninModel:
+      description: Signin Model
       required:
         - email
         - password
@@ -319,8 +316,6 @@ components:
           $ref: '#/components/parameters/email'
         password:
           $ref: '#/components/parameters/password'
-        confirm-password:
-          $ref: '#/components/parameters/confirm-password'
         age-group: 
           $ref: '#/components/parameters/age-group'
         gender:
@@ -485,7 +480,7 @@ components:
           example: Internal Server Error.
   
   responses:
-    LoginResponse:
+    SigninResponse:
       description: ログイン成功
       content:
         application/json:
