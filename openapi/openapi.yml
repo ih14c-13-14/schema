@@ -1,13 +1,13 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: API Title
   version: 1.0.1
 servers:
-# Added by API Auto Mocking Plugin
-- url: "http://localhost:3000/api/v1"
-  description: "ローカル環境"
-- url: "https://server.test/api/v1"
-  description: "本番環境"
+  # Added by API Auto Mocking Plugin
+  - url: "http://localhost:3000/api/v1"
+    description: "ローカル環境"
+  - url: "https://server.test/api/v1"
+    description: "本番環境"
 
 tags:
   - name: auth
@@ -29,14 +29,14 @@ paths:
       summary: ユーザーログイン
       description: メールアドレスとパスワードを使用してユーザーをログインします。
       requestBody:
-        $ref: '#/components/requestBodies/SigninRequestBody'
+        $ref: "#/components/requestBodies/SigninRequestBody"
       responses:
-        '200':
-          $ref: '#/components/responses/SigninResponse'          
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/SigninResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
   /auth/signup:
     post:
       tags:
@@ -44,25 +44,25 @@ paths:
       summary: 会員登録
       description: 以下のパラメータを登録
       requestBody:
-        $ref: '#/components/requestBodies/SignUpRequestBody'
+        $ref: "#/components/requestBodies/SignUpRequestBody"
       responses:
-        '200':
+        "200":
           description: OK
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
   /auth/signout:
     post:
       tags:
         - auth
       responses:
-        '200':
+        "200":
           description: OK
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /users/email-change/{user_id}:
     post:
@@ -71,20 +71,20 @@ paths:
       tags:
         - users
       security:
-      - Bearer: []
+        - Bearer: []
       parameters:
-      - $ref: '#/components/parameters/userid'
+        - $ref: "#/components/parameters/userid"
       requestBody:
-        $ref: '#/components/requestBodies/EmailChangeRequestBody'
+        $ref: "#/components/requestBodies/EmailChangeRequestBody"
       responses:
-        '200':
-          $ref: '#/components/responses/UpdateSuccessRequestResponse'          
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/UpdateSuccessRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
   /users/password-change/{user_id}:
     post:
       summary: パスワード変更
@@ -92,18 +92,18 @@ paths:
       tags:
         - users
       security:
-      - Bearer: []
+        - Bearer: []
       parameters:
-      - $ref: '#/components/parameters/userid'
+        - $ref: "#/components/parameters/userid"
       requestBody:
-        $ref: '#/components/requestBodies/PasswordChangeRequestBody'
+        $ref: "#/components/requestBodies/PasswordChangeRequestBody"
       responses:
-        '200':
-          $ref: '#/components/responses/UpdateSuccessRequestResponse' 
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/UpdateSuccessRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
   /users/others-change/{user_id}:
     post:
       summary: 他情報変更
@@ -111,20 +111,20 @@ paths:
       tags:
         - users
       security:
-      - Bearer: []
+        - Bearer: []
       parameters:
-      - $ref: '#/components/parameters/userid'
+        - $ref: "#/components/parameters/userid"
       requestBody:
-        $ref: '#/components/requestBodies/OthersChangeRequestBody'
+        $ref: "#/components/requestBodies/OthersChangeRequestBody"
       responses:
-        '200':
-          $ref: '#/components/responses/UpdateSuccessRequestResponse' 
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/UpdateSuccessRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /arts:
     get:
@@ -133,12 +133,12 @@ paths:
       tags:
         - arts
       responses:
-        '200':
-          $ref: '#/components/responses/ArtsResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/ArtsResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /arts/author:
     get:
@@ -147,12 +147,12 @@ paths:
       tags:
         - arts
       responses:
-        '200':
-          $ref: '#/components/responses/ArtsResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/ArtsResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /arts/save/{user_id}:
     get:
@@ -161,18 +161,18 @@ paths:
       tags:
         - arts
       security:
-      - Bearer: []
+        - Bearer: []
       parameters:
-      - $ref: '#/components/parameters/userid'
+        - $ref: "#/components/parameters/userid"
       responses:
-        '200':
-          $ref: '#/components/responses/ArtsResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/ArtsResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /stamps/{user_id}:
     get:
@@ -181,18 +181,18 @@ paths:
       tags:
         - stamps
       security:
-      - Bearer: []
+        - Bearer: []
       parameters:
-      - $ref: '#/components/parameters/userid'
+        - $ref: "#/components/parameters/userid"
       responses:
-        '200':
-          $ref: '#/components/responses/StampsResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '500':
-          $ref: '#/components/responses/InternalServerErrorResponse'
+        "200":
+          $ref: "#/components/responses/StampsResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
 components:
   parameters:
@@ -203,10 +203,10 @@ components:
       required: true
       schema:
         type: string
-        example: 'hello world'
+        example: "hello world"
     email:
       name: email
-      in: path
+      in: header
       description: メールアドレス
       required: true
       schema:
@@ -214,7 +214,7 @@ components:
         example: example@example.com
     password:
       name: password
-      in: path
+      in: header
       description: パスワード
       required: true
       schema:
@@ -252,7 +252,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SigninModel'
+            $ref: "#/components/schemas/SignInModel"
 
     SignUpRequestBody:
       description: Signup user
@@ -260,7 +260,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SignUpModel'
+            $ref: "#/components/schemas/SignUpModel"
 
     EmailChangeRequestBody:
       description: email change
@@ -268,7 +268,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/EmailChangeModel'
+            $ref: "#/components/schemas/EmailChangeModel"
 
     PasswordChangeRequestBody:
       description: password change
@@ -276,7 +276,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PasswordChangeModel'
+            $ref: "#/components/schemas/PasswordChangeModel"
 
     OthersChangeRequestBody:
       description: その他情報変更
@@ -284,20 +284,20 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/OthersChangeModel'
+            $ref: "#/components/schemas/OthersChangeModel"
 
   schemas:
-    SigninModel:
-      description: Signin Model
+    SignInModel:
+      description: SignIn Model
       required:
         - email
         - password
       type: object
       properties:
         email:
-          $ref: '#/components/parameters/email'
+          type: string
         password:
-          $ref: '#/components/parameters/password'
+          type: string
 
     SignUpModel:
       description: SignUp Model
@@ -311,15 +311,16 @@ components:
       type: object
       properties:
         email:
-          $ref: '#/components/parameters/email'
+          type: string
         password:
-          $ref: '#/components/parameters/password'
-        age-group: 
-          $ref: '#/components/parameters/age-group'
+          type: string
+        age-group:
+          type: integer
         gender:
-          $ref: '#/components/parameters/gender'
+          type: integer
         prefectures:
-          $ref: '#/components/parameters/prefectures'
+          type: integer
+      additionalProperties: false
 
     PasswordChangeModel:
       description: password change Model
@@ -328,7 +329,7 @@ components:
       type: object
       properties:
         password:
-          $ref: '#/components/parameters/password'
+          type: string
 
     EmailChangeModel:
       description: email change Model
@@ -337,8 +338,8 @@ components:
       type: object
       properties:
         email:
-          $ref: '#/components/parameters/email'
-    
+          type: string
+
     OthersChangeModel:
       description: other change Model
       required:
@@ -348,11 +349,11 @@ components:
       type: object
       properties:
         gender:
-          $ref: '#/components/parameters/gender'
+          type: integer
         age-group:
-          $ref: '#/components/parameters/age-group'
+          type: integer
         prefectures:
-          $ref: '#/components/parameters/prefectures'
+          type: integer
 
     ArtsModel:
       description: Response Arts Model.
@@ -476,7 +477,7 @@ components:
           title: error message
           type: string
           example: Internal Server Error.
-  
+
   responses:
     SigninResponse:
       description: ログイン成功
@@ -493,14 +494,14 @@ components:
               expires_in:
                 type: integer
                 example: 3600
-    
+
     ArtsResponse:
       description: 作品情報を返す。
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ArtsModel'
+              - $ref: "#/components/schemas/ArtsModel"
 
     StampsResponse:
       description: スタンプの個数と作品情報を返す。
@@ -508,76 +509,76 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/StampsModel'
-    
+              - $ref: "#/components/schemas/StampsModel"
+
     UpdateSuccessRequestResponse:
       description: 更新成功のレスポンス
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/UpdateSuccessModel'
+              - $ref: "#/components/schemas/UpdateSuccessModel"
 
     BadRequestResponse:
-      description: | 
+      description: |
         Bad Request.
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ErrorModel'
+              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
                 example: 400
               message:
                 example: Bad Request.
     UnauthorizedResponse:
-      description: | 
+      description: |
         Unauthorized.
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ErrorModel'
+              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
                 example: 401
               message:
                 example: Unauthorized.
     ForbiddenResponse:
-      description: | 
+      description: |
         Forbidden.
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ErrorModel'
+              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
                 example: 403
               message:
                 example: Forbidden.
     NotFoundResponse:
-      description: | 
+      description: |
         Not Found.
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ErrorModel'
+              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
                 example: 404
               message:
                 example: Not Found.
     ConflictErrorResponse:
-      description: | 
+      description: |
         Conflict.
       content:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/ErrorModel'
+              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
                 example: 409
@@ -589,7 +590,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorModel'
+            $ref: "#/components/schemas/ErrorModel"
 
   securitySchemes:
     Bearer:
