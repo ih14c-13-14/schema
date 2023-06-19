@@ -31,36 +31,47 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/SigninRequestBody"
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/SigninResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          description: ユーザが存在せずログインができない場合。
+          $ref: "#/components/responses/UnauthorizedResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /auth/signup:
+  /signup:
     post:
       tags:
         - auth
       summary: 会員登録
-      description: 以下のパラメータを登録
+      description: リクエストBodyの内容を登録する
       requestBody:
         $ref: "#/components/requestBodies/SignUpRequestBody"
       responses:
-        "200":
-          description: OK
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
+        "201":
+          $ref: "#/components/responses/SignUpResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "409":
+          $ref: "#/components/responses/AlreadyEmailReponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /auth/signout:
+  /signout:
     post:
+      summary: 会員のログアウト
+      description: JWTTokenを削除して会員をログアウトさせる。
       tags:
         - auth
+      security:
+        - Bearer: []
       responses:
-        "200":
-          description: OK
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
+        "201":
+          $ref: "#/components/responses/SignOutResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
@@ -204,22 +215,6 @@ components:
       schema:
         type: string
         example: "hello world"
-    email:
-      name: email
-      in: header
-      description: メールアドレス
-      required: true
-      schema:
-        type: string
-        example: example@example.com
-    password:
-      name: password
-      in: header
-      description: パスワード
-      required: true
-      schema:
-        type: string
-        example: password
     age-group:
       name: ageGroup
       in: path
@@ -298,27 +293,26 @@ components:
           type: string
         password:
           type: string
-
+      additionalProperties: false
     SignUpModel:
       description: SignUp Model
       required:
         - email
         - password
-        - confirm-password
-        - age-group
+        - age_group
         - gender
-        - prefectures
+        - prefecture
       type: object
       properties:
         email:
           type: string
         password:
           type: string
-        age-group:
+        age_group:
           type: integer
         gender:
           type: integer
-        prefectures:
+        prefecture:
           type: integer
       additionalProperties: false
 
@@ -471,12 +465,17 @@ components:
       properties:
         code:
           title: error code
-          type: string
-          example: 500
+          type: integer
         message:
           title: error message
           type: string
-          example: Internal Server Error.
+
+    "DtoModel":
+      {
+        type: object,
+        properties:
+          { "property": { "type": "string" }, "message": { "type": "string" } },
+      }
 
   responses:
     SigninResponse:
@@ -511,6 +510,26 @@ components:
             allOf:
               - $ref: "#/components/schemas/StampsModel"
 
+    SignUpResponse:
+      description: User登録完了
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: 201
+              message:
+                example: created
+    SignOutResponse:
+      description: サインアウト完了
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: 201
+              message:
+                example: サインアウトしました。
     UpdateSuccessRequestResponse:
       description: 更新成功のレスポンス
       content:
@@ -518,23 +537,33 @@ components:
           schema:
             allOf:
               - $ref: "#/components/schemas/UpdateSuccessModel"
-
-    BadRequestResponse:
-      description: |
-        Bad Request.
+    AlreadyEmailReponse:
+      description: メールアドレスは既に登録されている場合
       content:
         application/json:
           schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorModel"
             properties:
               code:
+                example: 409
+              message:
+                example: メールアドレスは既に登録されています。
+
+    BadRequestResponse:
+      description: Bad Request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
                 example: 400
               message:
-                example: Bad Request.
+                type: array
+                items:
+                  $ref: "#/components/schemas/DtoModel"
     UnauthorizedResponse:
-      description: |
-        Unauthorized.
+      description: Unauthorized.
       content:
         application/json:
           schema:
@@ -543,8 +572,6 @@ components:
             properties:
               code:
                 example: 401
-              message:
-                example: Unauthorized.
     ForbiddenResponse:
       description: |
         Forbidden.
@@ -572,8 +599,7 @@ components:
               message:
                 example: Not Found.
     ConflictErrorResponse:
-      description: |
-        Conflict.
+      description: Conflict.
       content:
         application/json:
           schema:
@@ -585,12 +611,17 @@ components:
               message:
                 example: Conflict.
     InternalServerErrorResponse:
-      description: |-
-        Internal Server Error.
+      description: Internal Server Error.
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorModel"
+            allOf:
+              - $ref: "#/components/schemas/ErrorModel"
+            properties:
+              code:
+                example: 500
+              message:
+                example: internal server error
 
   securitySchemes:
     Bearer:
