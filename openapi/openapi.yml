@@ -497,11 +497,12 @@ components:
         user_id:
           type: string
       additionalProperties: false
-
     ArtsModel:
       description: Response Arts Model.
       type: object
       properties: # TODO: 作品がユーザに保存されているかを返す。
+        arts.id:
+          type: string
         arts.name:
           type: string
         arts.address:
@@ -517,6 +518,8 @@ components:
       description: Response Arts Detail Model.
       type: object
       properties: # TODO: 作品がユーザに保存されているかを返す。
+        arts.id:
+          type: string
         arts.name:
           type: string
         arts.address:
