@@ -116,7 +116,7 @@ paths:
         $ref: "#/components/requestBodies/UserTokenRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SuccessRequestResponse"
+          $ref: "#/components/responses/SuccessResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -139,7 +139,7 @@ paths:
         $ref: "#/components/requestBodies/PasswordChangeRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SuccessRequestResponse"
+          $ref: "#/components/responses/SuccessResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -161,7 +161,7 @@ paths:
         $ref: "#/components/requestBodies/EmailRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SuccessRequestResponse"
+          $ref: "#/components/responses/SuccessResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -182,7 +182,7 @@ paths:
         $ref: "#/components/requestBodies/PasswordResetRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SuccessRequestResponse"
+          $ref: "#/components/responses/SuccessResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -205,7 +205,7 @@ paths:
         $ref: "#/components/requestBodies/OthersChangeRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SuccessRequestResponse"
+          $ref: "#/components/responses/SuccessResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -222,8 +222,21 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/ArtsResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+  /arts/{art_id}:
+    get:
+      summary: 作品の詳細情報を取得。
+      description: art_idの作品のの詳細情報を取得する。
+      tags:
+        - arts
+      parameters:
+        - $ref: "#/components/parameters/art_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/ArtsDetailResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
   /arts/author:
@@ -235,11 +248,9 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/ArtsResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /arts/save/{user_id}:
+  /arts/{user_id}/saved:
     get:
       summary: ユーザが保存した作品を取得する。
       description: ユーザIDを渡し、保存した作品を返す。
@@ -252,12 +263,34 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/ArtsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
+  /arts/{art_id}/save: # TODO: save機能のエンドポイント
+    post:
+      summary: ユーザが作品を保存する。
+      description: ユーザIDとarts_idを渡し、作品を保存する。
+      tags:
+        - arts
+      security:
+        - Bearer: []
+      parameters:
+        - $ref: "#/components/parameters/art_id"
+      requestBody:
+        $ref: "#/components/requestBodies/ArtUserIdSaveRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+
   /stamps/{user_id}:
     get:
       summary: スタンプを取得する。
@@ -271,10 +304,10 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/StampsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
@@ -284,6 +317,14 @@ components:
       name: user_id
       in: path
       description: ユーザID
+      required: true
+      schema:
+        type: string
+        example: "hello world"
+    art_id:
+      name: art_id
+      in: path
+      description: アートID
       required: true
       schema:
         type: string
@@ -345,7 +386,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OthersChangeModel"
-
+    ArtUserIdSaveRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ArtUserIdSaveModel"
   schemas:
     SignInModel:
       description: SignIn Model
@@ -442,50 +488,58 @@ components:
           type: integer
       additionalProperties: false
 
+    ArtUserIdSaveModel:
+      description: ユーザが作品を保存する
+      required:
+        - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
+      additionalProperties: false
+
     ArtsModel:
       description: Response Arts Model.
       type: object
-      properties:
-        authors.name:
-          type: string
-          example: レアンドロ・エルリッヒ
-        authors.name_kana:
-          type: string
-          example: レアンドロ・エルリッヒ
-        arts.created_year:
-          type: integer
-          example: 2023
-        arts.is_public:
-          type: boolean
-          example: true
+      properties: # TODO: 作品がユーザに保存されているかを返す。
         arts.name:
           type: string
-          example: 空の池
-        arts.name_kana:
-          type: string
-          example: そらのいけ
         arts.address:
           type: string
-          example: 越後妻有里山現代美術館
+        arts.image_path:
+          type: array
+          items:
+            type: string
+        authors.name:
+          type: string
+
+    ArtsDetailModel:
+      description: Response Arts Detail Model.
+      type: object
+      properties: # TODO: 作品がユーザに保存されているかを返す。
+        arts.name:
+          type: string
+        arts.address:
+          type: string
+        arts.image_path:
+          type: array
+          items:
+            type: string
         arts.description:
           type: string
-          example: キナーレの中央にある回路に囲まれた大きな池の水面に光が反射し、空や建物を鏡のように移している。
-        arts.image_path:
+        arts.is_public:
+          type: boolean
+        arts.created_year:
+          type: integer
+          example: 2023 # NOTE: exampleを入力しないと０になるため。
+        arts.datetime_description:
           type: string
-          example: xxxxxx
-        arts.start_date:
+        arts.closed_day_description:
           type: string
-          example: 2023/06/13
-        arts.end_date:
+        institutions.admission_fee_description:
           type: string
-          example: 2024/06/13
-        arts.closin_day:
+        authors.name:
           type: string
-          example: 2024/06/13
-        area.name:
-          type: string
-          example: KSG
-
     StampsModel:
       description: Response Arts Model.
       type: object
@@ -594,7 +648,13 @@ components:
           schema:
             allOf:
               - $ref: "#/components/schemas/ArtsModel"
-
+    ArtsDetailResponse:
+      description: 作品の詳細情報を返す。
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/ArtsDetailModel"
     StampsResponse:
       description: スタンプの個数と作品情報を返す。
       content:
@@ -623,7 +683,7 @@ components:
                 example: 201
               message:
                 example: サインアウトしました。
-    SuccessRequestResponse:
+    SuccessResponse:
       description: 成功のレスポンス
       content:
         application/json:
