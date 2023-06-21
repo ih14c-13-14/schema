@@ -29,7 +29,7 @@ paths:
       summary: ユーザーログイン
       description: メールアドレスとパスワードを使用してユーザーをログインします。
       requestBody:
-        $ref: "#/components/requestBodies/SigninRequestBody"
+        $ref: "#/components/requestBodies/SignInRequestBody"
       responses:
         "201":
           $ref: "#/components/responses/SigninResponse"
@@ -56,7 +56,7 @@ paths:
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "409":
-          $ref: "#/components/responses/AlreadyEmailReponse"
+          $ref: "#/components/responses/AlreadyEmailResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
   /signout:
@@ -76,28 +76,57 @@ paths:
           $ref: "#/components/responses/InternalServerErrorResponse"
 
   /users/email-change/{user_id}:
+    # TODO: tokenテーブルにemailを保存。tokenが正しい場合に、emailを更新するため。
     post:
-      summary: メールアドレス変更
-      description: 新しいメールアドレスに変更する。
+      summary: 新しいメールアドレス受け取る。
+      description: 1.新しいメールアドレスを受け取る<br>
+        2.メールアドレスが既に登録されていなければメールアドレス宛にtokenを付与したリンクを送る。
+
       tags:
         - users
       security:
         - Bearer: []
       parameters:
-        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/user_id"
       requestBody:
-        $ref: "#/components/requestBodies/EmailChangeRequestBody"
+        $ref: "#/components/requestBodies/EmailRequestBody"
       responses:
-        "200":
-          $ref: "#/components/responses/UpdateSuccessRequestResponse"
+        "201":
+          $ref: "#/components/responses/EmailTransmissionSuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/AlreadyEmailResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+  /users/email-change/verify/{user_id}:
+    put:
+      summary: メールアドレス変更
+      description:
+        1.tokenをチェックし一致していればメールアドレスを更新する。<br>
+        - tokenが不正なら403を返す。
+        - tokenが正常なら201を返す。
+      tags:
+        - users
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      requestBody:
+        $ref: "#/components/requestBodies/UserTokenRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
   /users/password-change/{user_id}:
-    post:
+    put:
       summary: パスワード変更
       description: 新しいパスワードに変更する。
       tags:
@@ -105,18 +134,65 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/user_id"
       requestBody:
         $ref: "#/components/requestBodies/PasswordChangeRequestBody"
       responses:
-        "200":
-          $ref: "#/components/responses/UpdateSuccessRequestResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
+        "201":
+          $ref: "#/components/responses/SuccessRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+  /users/password-reset/{user_id}:
+    post:
+      summary: パスワードリセット
+      description:
+        1.メールアドレスを受け取り、存在すればメールアドレス宛にリンクを送信<br>
+        - 存在しない場合は、401を返す。<br>
+        2.リンクにアクセスし、パスポートのリセットを行う。
+      tags:
+        - users
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      requestBody:
+        $ref: "#/components/requestBodies/EmailRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+
+  /users/password-reset/verify/{user_id}:
+    put:
+      summary: パスワードリセット
+      description: 1.tokenを受け取り、正常ならpasswordを更新する。<br>
+        2.不正な値なら403を返す。
+      tags:
+        - users
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      requestBody:
+        $ref: "#/components/requestBodies/PasswordResetRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
   /users/others-change/{user_id}:
-    post:
+    put:
       summary: 他情報変更
       description: 年齢、都道府県、性別の変更を行う。
       tags:
@@ -124,16 +200,16 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/user_id"
       requestBody:
         $ref: "#/components/requestBodies/OthersChangeRequestBody"
       responses:
-        "200":
-          $ref: "#/components/responses/UpdateSuccessRequestResponse"
+        "201":
+          $ref: "#/components/responses/SuccessRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
@@ -150,7 +226,6 @@ paths:
           $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-
   /arts/author:
     get:
       summary: 作者の作品を取得する。
@@ -164,7 +239,6 @@ paths:
           $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-
   /arts/save/{user_id}:
     get:
       summary: ユーザが保存した作品を取得する。
@@ -174,7 +248,7 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/user_id"
       responses:
         "200":
           $ref: "#/components/responses/ArtsResponse"
@@ -184,7 +258,6 @@ paths:
           $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-
   /stamps/{user_id}:
     get:
       summary: スタンプを取得する。
@@ -194,7 +267,7 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/user_id"
       responses:
         "200":
           $ref: "#/components/responses/StampsResponse"
@@ -207,7 +280,7 @@ paths:
 
 components:
   parameters:
-    userid:
+    user_id:
       name: user_id
       in: path
       description: ユーザID
@@ -215,33 +288,9 @@ components:
       schema:
         type: string
         example: "hello world"
-    age-group:
-      name: ageGroup
-      in: path
-      description: 年齢範囲
-      required: true
-      schema:
-        type: integer
-        example: 1
-    gender:
-      name: gender
-      in: path
-      description: 性別
-      required: true
-      schema:
-        type: integer
-        example: 1
-    prefectures:
-      name: prefectures
-      in: path
-      description: 都道府県
-      required: true
-      schema:
-        type: integer
-        example: 1
 
   requestBodies:
-    SigninRequestBody:
+    SignInRequestBody:
       description: signin user
       required: true
       content:
@@ -257,13 +306,29 @@ components:
           schema:
             $ref: "#/components/schemas/SignUpModel"
 
-    EmailChangeRequestBody:
+    EmailRequestBody:
       description: email change
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/EmailChangeModel"
+            $ref: "#/components/schemas/EmailModel"
+
+    UserTokenRequestBody:
+      description: user token
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserTokenModel"
+
+    PasswordResetRequestBody:
+      description: password reset
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PasswordResetModel"
 
     PasswordChangeRequestBody:
       description: password change
@@ -271,7 +336,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PasswordChangeModel"
+            $ref: "#/components/schemas/PasswordModel"
 
     OthersChangeRequestBody:
       description: その他情報変更
@@ -316,23 +381,50 @@ components:
           type: integer
       additionalProperties: false
 
-    PasswordChangeModel:
-      description: password change Model
+    PasswordModel:
+      description: password Model
       required:
         - password
       type: object
       properties:
         password:
           type: string
-
-    EmailChangeModel:
-      description: email change Model
+      additionalProperties: false
+    EmailModel:
+      description: email Model
       required:
         - email
       type: object
       properties:
         email:
           type: string
+      additionalProperties: false
+
+    UserTokenModel:
+      description: user token Model
+      required:
+        - token
+        - email
+      type: object
+      properties:
+        token:
+          type: string
+        email:
+          type: string
+      additionalProperties: false
+
+    PasswordResetModel:
+      description: password reset model
+      required:
+        - token
+        - password
+      type: object
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+      additionalProperties: false
 
     OthersChangeModel:
       description: other change Model
@@ -348,6 +440,7 @@ components:
           type: integer
         prefectures:
           type: integer
+      additionalProperties: false
 
     ArtsModel:
       description: Response Arts Model.
@@ -440,16 +533,16 @@ components:
           type: integer
           example: 10
 
-    UpdateSuccessModel:
-      description: 更新成功
+    SuccessModel:
+      description: 成功
       required:
-        - code
+        - statusCode
         - message
       type: object
       properties:
-        code:
-          title: code
-          type: string
+        statusCode:
+          title: statusCode
+          type: integer
           example: 201
         message:
           title: message
@@ -459,11 +552,11 @@ components:
     ErrorModel:
       description: Response Error Model.
       required:
-        - code
+        - statusCode
         - message
       type: object
       properties:
-        code:
+        statusCode:
           title: error code
           type: integer
         message:
@@ -486,7 +579,7 @@ components:
             properties:
               access_token:
                 type: string
-                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhvcml0aWVzIjpbXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpAVCI9.eyJzdWIiOiIxMjM0NTY3ODkwIrwinFtZSI6KivaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhoul0aWVzImpfXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               token_type:
                 type: string
                 example: Bearer
@@ -516,7 +609,7 @@ components:
         application/json:
           schema:
             properties:
-              code:
+              statusCode:
                 example: 201
               message:
                 example: created
@@ -526,27 +619,37 @@ components:
         application/json:
           schema:
             properties:
-              code:
+              statusCode:
                 example: 201
               message:
                 example: サインアウトしました。
-    UpdateSuccessRequestResponse:
-      description: 更新成功のレスポンス
+    SuccessRequestResponse:
+      description: 成功のレスポンス
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/UpdateSuccessModel"
-    AlreadyEmailReponse:
+              - $ref: "#/components/schemas/SuccessModel"
+    AlreadyEmailResponse:
       description: メールアドレスは既に登録されている場合
       content:
         application/json:
           schema:
             properties:
-              code:
+              statusCode:
                 example: 409
               message:
                 example: メールアドレスは既に登録されています。
+    EmailTransmissionSuccessResponse:
+      description: メールが正常に送られたレスポンス。
+      content:
+        application/json:
+          schema:
+            properties:
+              statusCode:
+                example: 201
+              message:
+                example: メールが正常に送られました。
 
     BadRequestResponse:
       description: Bad Request.
@@ -570,8 +673,9 @@ components:
             allOf:
               - $ref: "#/components/schemas/ErrorModel"
             properties:
-              code:
+              statusCode:
                 example: 401
+
     ForbiddenResponse:
       description: |
         Forbidden.
@@ -581,10 +685,11 @@ components:
             allOf:
               - $ref: "#/components/schemas/ErrorModel"
             properties:
-              code:
+              statusCode:
                 example: 403
               message:
                 example: Forbidden.
+
     NotFoundResponse:
       description: |
         Not Found.
@@ -594,31 +699,20 @@ components:
             allOf:
               - $ref: "#/components/schemas/ErrorModel"
             properties:
-              code:
+              statusCode:
                 example: 404
               message:
                 example: Not Found.
-    ConflictErrorResponse:
-      description: Conflict.
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorModel"
-            properties:
-              code:
-                example: 409
-              message:
-                example: Conflict.
+
     InternalServerErrorResponse:
-      description: Internal Server Error.
+      description: サーバエラー
       content:
         application/json:
           schema:
             allOf:
               - $ref: "#/components/schemas/ErrorModel"
             properties:
-              code:
+              statusCode:
                 example: 500
               message:
                 example: internal server error
