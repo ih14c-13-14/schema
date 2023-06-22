@@ -32,7 +32,7 @@ paths:
         $ref: "#/components/requestBodies/SignInRequestBody"
       responses:
         "201":
-          $ref: "#/components/responses/SigninResponse"
+          $ref: "#/components/responses/SignInResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -290,11 +290,22 @@ paths:
           $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
+  /arts/areas:
+    get:
+      summary: 作品のIDとエリアコードを返す。
+      description: 作品のIDとエリアコードを返す。
+      tags:
+        - arts
+      responses:
+        "200":
+          $ref: "#/components/responses/ArtsAreaResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /stamps/{user_id}:
     get:
-      summary: スタンプを取得する。
-      description: ユーザのスタンプを地域ごとに取得する。
+      summary: 現在獲得しているスタンプを取得
+      description: 現在獲得しているスタンプをエリアごとに取得する。
       tags:
         - stamps
       security:
@@ -303,14 +314,33 @@ paths:
         - $ref: "#/components/parameters/user_id"
       responses:
         "200":
-          $ref: "#/components/responses/StampsResponse"
+          $ref: "#/components/responses/ArtsAreaResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-
+    post:
+      summary: スタンプを押す
+      description: スタンプを新たに押されたらDBにinsertする。
+      tags:
+        - stamps
+      security:
+        - Bearer: []
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      requestBody:
+        $ref: "#/components/requestBodies/ArtIdRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
 components:
   parameters:
     user_id:
@@ -346,6 +376,14 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/SignUpModel"
+
+    ArtIdRequestBody:
+      description: アートのIDを取得
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ArtIdModel"
 
     EmailRequestBody:
       description: email change
@@ -386,6 +424,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OthersChangeModel"
+
     ArtUserIdSaveRequestBody:
       required: true
       content:
@@ -445,7 +484,6 @@ components:
         email:
           type: string
       additionalProperties: false
-
     UserTokenModel:
       description: user token Model
       required:
@@ -513,7 +551,16 @@ components:
             type: string
         authors.name:
           type: string
-
+      additionalProperties: false
+    ArtsAreaModel:
+      description: Response Area Model
+      type: object
+      properties: # TODO: 作品がユーザに保存されているかを返す。
+        area.code:
+          type: string
+        arts.id:
+          type: string
+      additionalProperties: false
     ArtsDetailModel:
       description: Response Arts Detail Model.
       type: object
@@ -543,53 +590,15 @@ components:
           type: string
         authors.name:
           type: string
-    StampsModel:
-      description: Response Arts Model.
+    ArtIdModel:
+      description: art id Model
+      required:
+        - art_id
       type: object
       properties:
-        authors.name:
+        arts_id:
           type: string
-          example: レアンドロ・エルリッヒ
-        authors.name_kana:
-          type: string
-          example: レアンドロ・エルリッヒ
-        arts.created_year:
-          type: integer
-          example: 2023
-        arts.is_public:
-          type: boolean
-          example: true
-        arts.name:
-          type: string
-          example: 空の池
-        arts.name_kana:
-          type: string
-          example: そらのいけ
-        arts.address:
-          type: string
-          example: 越後妻有里山現代美術館
-        arts.description:
-          type: string
-          example: キナーレの中央にある回路に囲まれた大きな池の水面に光が反射し、空や建物を鏡のように移している。
-        arts.image_path:
-          type: string
-          example: xxxxxx
-        arts.start_date:
-          type: string
-          example: 2023/06/13
-        arts.end_date:
-          type: string
-          example: 2024/06/13
-        arts.closin_day:
-          type: string
-          example: 2024/06/13
-        area.name:
-          type: string
-          example: KSG
-        count(*):
-          type: integer
-          example: 10
-
+      additionalProperties: false
     SuccessModel:
       description: 成功
       required:
@@ -605,7 +614,6 @@ components:
           title: message
           type: string
           example: 成功
-
     ErrorModel:
       description: Response Error Model.
       required:
@@ -619,8 +627,7 @@ components:
         message:
           title: error message
           type: string
-
-    "DtoModel":
+    DtoModel:
       {
         type: object,
         properties:
@@ -628,7 +635,7 @@ components:
       }
 
   responses:
-    SigninResponse:
+    SignInResponse:
       description: ログイン成功
       content:
         application/json:
@@ -643,29 +650,6 @@ components:
               expires_in:
                 type: integer
                 example: 3600
-
-    ArtsResponse:
-      description: 作品情報を返す。
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ArtsModel"
-    ArtsDetailResponse:
-      description: 作品の詳細情報を返す。
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ArtsDetailModel"
-    StampsResponse:
-      description: スタンプの個数と作品情報を返す。
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/StampsModel"
-
     SignUpResponse:
       description: User登録完了
       content:
@@ -686,6 +670,33 @@ components:
                 example: 201
               message:
                 example: サインアウトしました。
+    ArtsResponse:
+      description: 作品情報を返す。
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: "#/components/schemas/ArtsModel"
+    ArtsDetailResponse:
+      description: 作品の詳細情報を返す。
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: "#/components/schemas/ArtsDetailModel"
+    ArtsAreaResponse:
+      description: 作品IDとエリアコードを返す。
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: "#/components/schemas/ArtsAreaModel"
     SuccessResponse:
       description: 成功のレスポンス
       content:
@@ -738,7 +749,6 @@ components:
             properties:
               statusCode:
                 example: 401
-
     ForbiddenResponse:
       description: |
         Forbidden.
@@ -752,7 +762,6 @@ components:
                 example: 403
               message:
                 example: Forbidden.
-
     NotFoundResponse:
       description: |
         Not Found.
@@ -766,7 +775,6 @@ components:
                 example: 404
               message:
                 example: Not Found.
-
     InternalServerErrorResponse:
       description: サーバエラー
       content:
