@@ -248,10 +248,10 @@ paths:
           $ref: "#/components/responses/ArtsResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /arts/{user_id}/saved:
+  /arts/{user_id}/favorited:
     get:
-      summary: ユーザが保存した作品を取得する。
-      description: ユーザIDを渡し、保存した作品を返す。
+      summary: ユーザがお気に入りした作品を取得する。
+      description: ユーザIDを渡し、お気に入りした作品を返す。
       tags:
         - arts
       security:
@@ -267,10 +267,10 @@ paths:
           $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /arts/{art_id}/save: # TODO: save機能のエンドポイント
+  /arts/{art_id}/favorite: # TODO: favorite機能のエンドポイント
     post:
-      summary: ユーザが作品を保存する。
-      description: ユーザIDとarts_idを渡し、作品を保存する。
+      summary: ユーザが作品をお気に入りに登録する。
+      description: ユーザIDとarts_idを渡し、作品をお気に入りする。
       tags:
         - arts
       security:
@@ -531,7 +531,7 @@ components:
     ArtsModel:
       description: Response Arts Model.
       type: object
-      properties: # TODO: 作品がユーザに保存されているかを返す。
+      properties:
         arts.id:
           type: string
         arts.name:
@@ -544,20 +544,24 @@ components:
             type: string
         authors.name:
           type: string
+        is_favorited:
+          type: boolean
       additionalProperties: false
     ArtsAreaModel:
       description: Response Area Model
       type: object
-      properties: # TODO: 作品がユーザに保存されているかを返す。
+      properties:
         area.code:
           type: string
         arts.id:
           type: string
+        is_favorited:
+          type: boolean
       additionalProperties: false
     ArtsDetailModel:
       description: Response Arts Detail Model.
       type: object
-      properties: # TODO: 作品がユーザに保存されているかを返す。
+      properties:
         arts.id:
           type: string
         arts.name:
@@ -583,6 +587,8 @@ components:
           type: string
         authors.name:
           type: string
+        is_favorited:
+          type: boolean
     ArtIdModel:
       description: art id Model
       required:
