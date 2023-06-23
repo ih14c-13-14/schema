@@ -211,6 +211,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
+  # NOTE: お気に入り作品を取得する際は、/arts/{user_id}/favoritedも叩く。
   /arts:
     get:
       summary: 作品を取得する。
@@ -544,8 +545,6 @@ components:
             type: string
         authors.name:
           type: string
-        is_favorited:
-          type: boolean
       additionalProperties: false
     ArtsAreaModel:
       description: Response Area Model
@@ -555,8 +554,6 @@ components:
           type: string
         arts.id:
           type: string
-        is_favorited:
-          type: boolean
       additionalProperties: false
     ArtsDetailModel:
       description: Response Arts Detail Model.
@@ -587,8 +584,6 @@ components:
           type: string
         authors.name:
           type: string
-        is_favorited:
-          type: boolean
     ArtIdModel:
       description: art id Model
       required:
