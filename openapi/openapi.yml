@@ -40,7 +40,7 @@ paths:
           $ref: "#/components/responses/NotFoundResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /signup:
+  /auth/signup:
     post:
       tags:
         - auth
@@ -57,7 +57,7 @@ paths:
           $ref: "#/components/responses/AlreadyEmailResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /signout:
+  /auth/signout:
     post:
       summary: 会員のログアウト
       description: JWTTokenを削除して会員をログアウトさせる。
