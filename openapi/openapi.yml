@@ -289,17 +289,6 @@ paths:
           $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /arts/areas:
-    get:
-      summary: 作品のIDとエリアコードを返す。
-      description: 作品のIDとエリアコードを返す。
-      tags:
-        - arts
-      responses:
-        "200":
-          $ref: "#/components/responses/ArtsAreaResponse"
-        "500":
-          $ref: "#/components/responses/InternalServerErrorResponse"
 
   /qr/{art_id}:
     # NOTE: user_idをNULL許容する形になってしまう。JWTトークンがないと401を返すため、エンドポイントを分ける。
@@ -546,15 +535,6 @@ components:
         authors.name:
           type: string
       additionalProperties: false
-    ArtsAreaModel:
-      description: Response Area Model
-      type: object
-      properties:
-        area.code:
-          type: string
-        arts.id:
-          type: string
-      additionalProperties: false
     ArtsDetailModel:
       description: Response Arts Detail Model.
       type: object
@@ -731,15 +711,6 @@ components:
           schema:
             allOf:
               - $ref: "#/components/schemas/ArtsDetailModel"
-    ArtsAreaResponse:
-      description: 作品IDとエリアコードを返す。
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              allOf:
-                - $ref: "#/components/schemas/ArtsAreaModel"
     QRResponse:
       description: QRを読み込んだ際の情報を返す。
       content:
