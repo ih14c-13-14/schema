@@ -73,7 +73,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
-  /users/email-change/{user_id}:
+  /users/{user_id}/email-change:
     # TODO: tokenテーブルにemailを保存。tokenが正しい場合に、emailを更新するため。
     post:
       summary: 新しいメールアドレス受け取る。
@@ -99,7 +99,7 @@ paths:
           $ref: "#/components/responses/AlreadyEmailResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /users/email-change/verify/{user_id}:
+  /users/{user_id}/email-change/verify:
     put:
       summary: メールアドレス変更
       description:
@@ -123,7 +123,7 @@ paths:
           $ref: "#/components/responses/ForbiddenResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /users/password-change/{user_id}:
+  /users/{user_id}/password-change:
     put:
       summary: パスワード変更
       description: 新しいパスワードに変更する。
@@ -144,7 +144,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /users/password-reset/{user_id}:
+  /users/{user_id}/password-reset:
     post:
       summary: パスワードリセット
       description:
@@ -167,7 +167,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
-  /users/password-reset/verify/{user_id}:
+  /users/{user_id}/password-reset/verify:
     put:
       summary: パスワードリセット
       description: 1.tokenを受け取り、正常ならpasswordを更新する。<br>
@@ -189,7 +189,7 @@ paths:
           $ref: "#/components/responses/ForbiddenResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
-  /users/others-change/{user_id}:
+  /users/{user_id}/others-change:
     put:
       summary: 他情報変更
       description: 年齢、都道府県、性別の変更を行う。
