@@ -16,8 +16,6 @@ tags:
     description: ユーザ情報
   - name: arts
     description: アート情報
-  - name: stamps
-    description: stamp情報
   - name: QR
     description: QR関連
 
@@ -299,46 +297,6 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/ArtsAreaResponse"
-        "500":
-          $ref: "#/components/responses/InternalServerErrorResponse"
-
-  /stamps/{user_id}:
-    get:
-      summary: 現在獲得しているスタンプを取得
-      description: 現在獲得しているスタンプをエリアごとに取得する。
-      tags:
-        - stamps
-      security:
-        - Bearer: []
-      parameters:
-        - $ref: "#/components/parameters/user_id"
-      responses:
-        "200":
-          $ref: "#/components/responses/ArtsAreaResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "500":
-          $ref: "#/components/responses/InternalServerErrorResponse"
-    post: # NOTE: JWTトークンを持つならstampテーブルに格納。
-      summary: スタンプを押す
-      description: スタンプを新たに押されたらDBにinsertする。
-      tags:
-        - stamps
-      security:
-        - Bearer: []
-      parameters:
-        - $ref: "#/components/parameters/user_id"
-      requestBody:
-        $ref: "#/components/requestBodies/ArtIdRequestBody"
-      responses:
-        "201":
-          $ref: "#/components/responses/SuccessResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
