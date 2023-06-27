@@ -308,6 +308,27 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerErrorResponse"
 
+    delete:
+      tags:
+        - arts
+      summary: ユーザが作品をお気に入りから削除する。
+      security:
+        - Bearer: []
+      parameters:
+        - $ref: "#/components/parameters/art_id"
+      requestBody:
+        $ref: "#/components/requestBodies/ArtUserIdSaveRequestBody"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
   /qr/{art_id}:
     # NOTE: user_idをNULL許容する形になってしまう。JWTトークンがないと401を返すため、エンドポイントを分ける。
     get:
