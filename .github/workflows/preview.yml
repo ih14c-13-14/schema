@@ -28,7 +28,7 @@ jobs:
           <script>\
             window.onload = () => {\
               window.ui = SwaggerUIBundle({\
-                url: ".\/openapi.yml",\
+                url: ".\/openapi.json",\
                 dom_id: "#swagger-ui",\
                 presets: [\
                   SwaggerUIBundle.presets.apis,\
@@ -38,7 +38,7 @@ jobs:
               });\
             };\
           <\/script>' ./docs/index.html && \
-          cp ./openapi/openapi.yml ./docs/openapi.yml
+          cp ./openapi/openapi.json ./docs/openapi.json
       - name: Publish to Cloudflare Pages
         id: publish
         uses: cloudflare/pages-action@1
