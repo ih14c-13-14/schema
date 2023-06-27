@@ -1,0 +1,2011 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Artist",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "users"
+    },
+    {
+      "name": "arts"
+    },
+    {
+      "name": "QR"
+    }
+  ],
+  "paths": {
+    "/arts/{art_id}": {
+      "get": {
+        "summary": "作品の詳細情報を取得。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "art_idの作品のの詳細情報を取得する。",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [
+          {
+            "name": "art_id",
+            "in": "path",
+            "description": "アートID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtsDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842693-run"
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "summary": "会員登録",
+        "x-apidog-folder": "auth",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "リクエストBodyの内容を登録する",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignUpModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignUpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "409",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlreadyEmailResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842694-run"
+      }
+    },
+    "/arts/author": {
+      "get": {
+        "summary": "作者の作品を取得する。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "作者の「あいうえお」順にして返す。",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842695-run"
+      }
+    },
+    "/auth/signout": {
+      "delete": {
+        "summary": "会員のログアウト",
+        "x-apidog-folder": "auth",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "JWTTokenを削除して会員をログアウトさせる。",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignOutResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842696-run"
+      }
+    },
+    "/arts": {
+      "get": {
+        "summary": "作品を取得する。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "すべての作品を取得する。",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842697-run"
+      }
+    },
+    "/qr/{art_id}": {
+      "get": {
+        "summary": "QRを読み込み時",
+        "x-apidog-folder": "QR",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "QRを読み込み時にAR作品のオブジェクト格納URL等を返す。",
+        "tags": [
+          "QR"
+        ],
+        "parameters": [
+          {
+            "name": "art_id",
+            "in": "path",
+            "description": "アートID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "os_name",
+            "in": "query",
+            "description": "存在しなければiOS用, Android用二つの3Dモデルのパスを返す",
+            "required": false,
+            "example": "Android",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "x-apidog-refs": {},
+                "x-apidog-orders": [],
+                "x-apidog-ignore-properties": []
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QRResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842698-run"
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "ユーザーログイン",
+        "x-apidog-folder": "auth",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "メールアドレスとパスワードを使用してユーザーをログインします。",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "メールアドレスかパスワードが間違っている",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842699-run"
+      }
+    },
+    "/users/{user_id}/others-change": {
+      "put": {
+        "summary": "他情報変更",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "年齢、都道府県、性別の変更を行う。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OthersChangeModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-apidog-orders": [
+                    "01H3XMFAPBV0B7J74ZE3AZ3ZN8"
+                  ],
+                  "x-apidog-refs": {
+                    "01H3XMFAPBV0B7J74ZE3AZ3ZN8": {
+                      "$ref": "#/components/schemas/ForbiddenResponse"
+                    }
+                  },
+                  "x-apidog-ignore-properties": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842700-run"
+      }
+    },
+    "/arts/{art_id}/favorite": {
+      "post": {
+        "summary": "ユーザが作品をお気に入りに登録する。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "ユーザIDとarts_idを渡し、作品をお気に入りする。",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [
+          {
+            "name": "art_id",
+            "in": "path",
+            "description": "アートID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArtUserIdSaveModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-apidog-orders": [
+                    "01H3XMRDKSNF2JBPNF02ZFBSZ2"
+                  ],
+                  "x-apidog-refs": {
+                    "01H3XMRDKSNF2JBPNF02ZFBSZ2": {
+                      "$ref": "#/components/schemas/ForbiddenResponse"
+                    }
+                  },
+                  "x-apidog-ignore-properties": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842701-run"
+      },
+      "delete": {
+        "summary": "ユーザが作品をお気に入りから削除する。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [
+          {
+            "name": "art_id",
+            "in": "path",
+            "description": "アートID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArtUserIdSaveModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apidog-ignore-properties": [],
+                  "x-apidog-orders": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842705-run"
+      }
+    },
+    "/arts/{user_id}/favorited": {
+      "get": {
+        "summary": "ユーザがお気に入りした作品を取得する。",
+        "x-apidog-folder": "arts",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "ユーザIDを渡し、お気に入りした作品を返す。",
+        "tags": [
+          "arts"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-apidog-orders": [
+                    "01H3XMP4P91BJMA99H7XQZFWT3"
+                  ],
+                  "x-apidog-refs": {
+                    "01H3XMP4P91BJMA99H7XQZFWT3": {
+                      "$ref": "#/components/schemas/ForbiddenResponse"
+                    }
+                  },
+                  "x-apidog-ignore-properties": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842702-run"
+      }
+    },
+    "/users/{user_id}/password-change": {
+      "put": {
+        "summary": "パスワード変更",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "新しいパスワードに変更する。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-apidog-orders": [
+                    "01H3XM859BE87633TRETAJRG25"
+                  ],
+                  "x-apidog-refs": {
+                    "01H3XM859BE87633TRETAJRG25": {
+                      "$ref": "#/components/schemas/ForbiddenResponse"
+                    }
+                  },
+                  "x-apidog-ignore-properties": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842703-run"
+      }
+    },
+    "/users/password-reset": {
+      "post": {
+        "summary": "パスワードリセット",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "1.メールアドレスを受け取り、存在すればメールアドレス宛にリンクを送信<br> - 存在しない場合は、401を返す。<br> 2.リンクにアクセスし、パスポートのリセットを行う。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842704-run"
+      }
+    },
+    "/users/{user_id}/email-change/verify": {
+      "put": {
+        "summary": "メールアドレス変更",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "1.tokenをチェックし一致していればメールアドレスを更新する。<br> - tokenが不正か、違うユーザーを対象にしたなら403を返す。 - tokenが正常なら201を返す。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTokenModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842706-run"
+      }
+    },
+    "/users/{user_id}/password-reset/verify": {
+      "put": {
+        "summary": "パスワードリセット",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "1.tokenを受け取り、正常ならpasswordを更新する。<br> 2.不正な値なら403を返す。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842707-run"
+      }
+    },
+    "/users/{user_id}/email-change": {
+      "post": {
+        "summary": "新しいメールアドレス受け取る。",
+        "x-apidog-folder": "users",
+        "x-apidog-status": "released",
+        "deprecated": false,
+        "description": "1.新しいメールアドレスを受け取る<br> 2.メールアドレスが既に登録されていなければメールアドレス宛にtokenを付与したリンクを送る。",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ユーザID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailModel"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTransmissionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "自分以外のユーザー情報の更新をしようとした",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-apidog-orders": [
+                    "01H3XM25ZMAG40RFEA5258CKFJ"
+                  ],
+                  "x-apidog-refs": {
+                    "01H3XM25ZMAG40RFEA5258CKFJ": {
+                      "$ref": "#/components/schemas/ForbiddenResponse"
+                    }
+                  },
+                  "x-apidog-ignore-properties": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "409",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlreadyEmailResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842708-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QRRequestBody": {
+        "description": "QR読み込み時にOSの名前を受け取る",
+        "type": "object",
+        "properties": {
+          "os_name": {
+            "type": "string",
+            "description": "3Dモデルの出しわけに利用"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "os_name"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "RequestBodies"
+      },
+      "NotFoundResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ErrorModel"
+          }
+        ],
+        "properties": {
+          "message": {
+            "examples": [
+              "Not Found."
+            ]
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-folder": "Response"
+      },
+      "InternalServerErrorResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ErrorModel"
+          }
+        ],
+        "properties": {
+          "message": {
+            "examples": [
+              "internal server error"
+            ]
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-folder": "Response"
+      },
+      "ForbiddenResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ErrorModel"
+          }
+        ],
+        "properties": {
+          "message": {
+            "examples": [
+              "Forbidden."
+            ]
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-folder": "Response"
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DtoModel"
+            }
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "UnauthorizedResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ErrorModel"
+          }
+        ],
+        "properties": {},
+        "x-apidog-orders": [],
+        "type": "object",
+        "x-apidog-folder": "Response"
+      },
+      "EmailTransmissionSuccessResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "AlreadyEmailResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "SuccessResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SuccessModel"
+          }
+        ],
+        "x-apidog-folder": "Response"
+      },
+      "QRResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/QRModel"
+          }
+        ],
+        "x-apidog-folder": "Response"
+      },
+      "ArtsDetailResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArtsDetailModel"
+          }
+        ],
+        "x-apidog-folder": "Response"
+      },
+      "ArtsResponse": {
+        "type": "array",
+        "items": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ArtsModel"
+            }
+          ]
+        },
+        "x-apidog-folder": "Response"
+      },
+      "ArtsDetailModel": {
+        "description": "Response Arts Detail Model.",
+        "type": "object",
+        "properties": {
+          "arts.id": {
+            "type": "string"
+          },
+          "arts.name": {
+            "type": "string"
+          },
+          "arts.address": {
+            "type": "string"
+          },
+          "arts.image_path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "arts.description": {
+            "type": "string"
+          },
+          "arts.is_public": {
+            "type": "boolean"
+          },
+          "arts.created_year": {
+            "type": "integer",
+            "examples": [
+              2023
+            ]
+          },
+          "arts.datetime_description": {
+            "type": "string"
+          },
+          "arts.closed_day_description": {
+            "type": "string"
+          },
+          "institutions.admission_fee_description": {
+            "type": "string"
+          },
+          "authors.name": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "arts.id",
+          "arts.name",
+          "arts.address",
+          "arts.image_path",
+          "arts.description",
+          "arts.is_public",
+          "arts.created_year",
+          "arts.datetime_description",
+          "arts.closed_day_description",
+          "institutions.admission_fee_description",
+          "authors.name"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "SignOutResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "SignUpResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "message"
+        ],
+        "type": "object",
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "DtoModel": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "property",
+          "message"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "SignInResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpAVCI9.eyJzdWIiOiIxMjM0NTY3ODkwIrwinFtZSI6KivaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhoul0aWVzImpfXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            ]
+          }
+        },
+        "x-apidog-orders": [
+          "access_token"
+        ],
+        "type": "object",
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Response"
+      },
+      "ErrorModel": {
+        "description": "Response Error Model.",
+        "required": [
+          "statusCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "title": "error code",
+            "type": "integer"
+          },
+          "message": {
+            "title": "error message",
+            "type": "string"
+          }
+        },
+        "x-apidog-orders": [
+          "statusCode",
+          "message"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "SuccessModel": {
+        "description": "成功",
+        "required": [
+          "statusCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "title": "statusCode",
+            "type": "integer",
+            "examples": [
+              201
+            ]
+          },
+          "message": {
+            "title": "message",
+            "type": "string",
+            "examples": [
+              "成功"
+            ]
+          }
+        },
+        "x-apidog-orders": [
+          "statusCode",
+          "message"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "QRUserIdModel": {
+        "description": "QR読み込み時にuserIDとOSの名前を受け取る",
+        "required": [
+          "user_id",
+          "os_name"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "os_name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "user_id",
+          "os_name"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "ArtsModel": {
+        "description": "Response Arts Model.",
+        "type": "object",
+        "properties": {
+          "arts.id": {
+            "type": "string"
+          },
+          "arts.name": {
+            "type": "string"
+          },
+          "arts.address": {
+            "type": "string"
+          },
+          "arts.image_path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authors.name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "arts.id",
+          "arts.name",
+          "arts.address",
+          "arts.image_path",
+          "authors.name"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "QRModel": {
+        "description": "QR Model",
+        "required": [
+          "arts.name",
+          "arts.address",
+          "authors.name"
+        ],
+        "type": "object",
+        "properties": {
+          "arts.id": {
+            "type": "string"
+          },
+          "arts.name": {
+            "type": "string"
+          },
+          "arts.address": {
+            "type": "string"
+          },
+          "arts.description": {
+            "type": "string"
+          },
+          "arts.is_public": {
+            "type": "boolean"
+          },
+          "arts.created_year": {
+            "type": "integer",
+            "examples": [
+              2023
+            ]
+          },
+          "arts.datetime_description": {
+            "type": "string"
+          },
+          "arts.closed_day_description": {
+            "type": "string"
+          },
+          "institutions.admission_fee_description": {
+            "type": "string"
+          },
+          "authors.name": {
+            "type": "string"
+          },
+          "poster_path": {
+            "type": "string"
+          },
+          "glb_path": {
+            "type": "string"
+          },
+          "reality_path": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "arts.id",
+          "arts.name",
+          "arts.address",
+          "arts.description",
+          "arts.is_public",
+          "arts.created_year",
+          "arts.datetime_description",
+          "arts.closed_day_description",
+          "institutions.admission_fee_description",
+          "authors.name",
+          "poster_path",
+          "glb_path",
+          "reality_path"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "ArtIdModel": {
+        "description": "art id Model",
+        "type": "object",
+        "properties": {
+          "arts_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "arts_id"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "PasswordResetModel": {
+        "description": "password reset model",
+        "required": [
+          "token",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "token",
+          "password"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "ArtUserIdSaveModel": {
+        "description": "ユーザが作品を保存する",
+        "required": [
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "user_id"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "OthersChangeModel": {
+        "description": "other change Model",
+        "required": [
+          "gender",
+          "age-group",
+          "prefectures"
+        ],
+        "type": "object",
+        "properties": {
+          "gender": {
+            "type": "integer"
+          },
+          "age-group": {
+            "type": "integer"
+          },
+          "prefectures": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "gender",
+          "age-group",
+          "prefectures"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "UserTokenModel": {
+        "description": "user token Model",
+        "required": [
+          "token",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "token",
+          "email"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "EmailModel": {
+        "description": "email Model",
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "email"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "SignUpModel": {
+        "description": "SignUp Model",
+        "required": [
+          "email",
+          "password",
+          "age_group",
+          "gender",
+          "prefecture"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "age_group": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "integer"
+          },
+          "prefecture": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "email",
+          "password",
+          "age_group",
+          "gender",
+          "prefecture"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "SignInModel": {
+        "description": "SignIn Model",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "email",
+          "password"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      },
+      "PasswordModel": {
+        "description": "password Model",
+        "required": [
+          "new_password",
+          "current_password"
+        ],
+        "type": "object",
+        "properties": {
+          "new_password": {
+            "type": "string"
+          },
+          "current_password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-apidog-orders": [
+          "new_password",
+          "current_password"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Schemas"
+      }
+    }
+  },
+  "servers": []
+}
