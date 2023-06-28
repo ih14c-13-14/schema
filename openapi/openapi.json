@@ -23,7 +23,7 @@
 		}
 	],
 	"paths": {
-		"/map": {
+		"/api/v1/map": {
 			"get": {
 				"summary": "住所を取得する。",
 				"x-apidog-folder": "map",
@@ -58,7 +58,7 @@
 				}
 			}
 		},
-		"/arts/{art_id}": {
+		"/api/v1/arts/{art_id}": {
 			"get": {
 				"summary": "作品の詳細情報を取得。",
 				"x-apidog-folder": "arts",
@@ -115,7 +115,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842693-run"
 			}
 		},
-		"/auth/signup": {
+		"/api/v1/auth/signup": {
 			"post": {
 				"summary": "会員登録",
 				"x-apidog-folder": "auth",
@@ -181,7 +181,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842694-run"
 			}
 		},
-		"/arts/author": {
+		"/api/v1/arts/author": {
 			"get": {
 				"summary": "作者の作品を取得する。",
 				"x-apidog-folder": "arts",
@@ -217,7 +217,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842695-run"
 			}
 		},
-		"/auth/signout": {
+		"/api/v1/auth/signout": {
 			"delete": {
 				"summary": "会員のログアウト",
 				"x-apidog-folder": "auth",
@@ -263,7 +263,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842696-run"
 			}
 		},
-		"/arts": {
+		"/api/v1/arts": {
 			"get": {
 				"summary": "作品を取得する。",
 				"x-apidog-folder": "arts",
@@ -299,7 +299,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842697-run"
 			}
 		},
-		"/qr/{art_id}": {
+		"/api/v1/qr/{art_id}": {
 			"get": {
 				"summary": "QRを読み込み時",
 				"x-apidog-folder": "QR",
@@ -380,7 +380,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842698-run"
 			}
 		},
-		"/auth/signin": {
+		"/api/v1/auth/signin": {
 			"post": {
 				"summary": "ユーザーログイン",
 				"x-apidog-folder": "auth",
@@ -446,7 +446,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842699-run"
 			}
 		},
-		"/users/{user_id}/others-change": {
+		"/api/v1/users/{user_id}/others-change": {
 			"put": {
 				"summary": "他情報変更",
 				"x-apidog-folder": "users",
@@ -559,7 +559,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842700-run"
 			}
 		},
-		"/arts/{art_id}/favorite": {
+		"/api/v1/arts/{art_id}/favorite": {
 			"post": {
 				"summary": "ユーザが作品をお気に入りに登録する。",
 				"x-apidog-folder": "arts",
@@ -770,7 +770,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842705-run"
 			}
 		},
-		"/arts/{user_id}/favorited": {
+		"/api/v1/arts/{user_id}/favorited": {
 			"get": {
 				"summary": "ユーザがお気に入りした作品を取得する。",
 				"x-apidog-folder": "arts",
@@ -863,7 +863,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842702-run"
 			}
 		},
-		"/users/{user_id}/password-change": {
+		"/api/v1/users/{user_id}/password-change": {
 			"put": {
 				"summary": "パスワード変更",
 				"x-apidog-folder": "users",
@@ -976,7 +976,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842703-run"
 			}
 		},
-		"/users/password-reset": {
+		"/api/v1/users/password-reset": {
 			"post": {
 				"summary": "パスワードリセット",
 				"x-apidog-folder": "users",
@@ -1052,7 +1052,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842704-run"
 			}
 		},
-		"/users/{user_id}/email-change/verify": {
+		"/api/v1/users/{user_id}/email-change/verify": {
 			"put": {
 				"summary": "メールアドレス変更",
 				"x-apidog-folder": "users",
@@ -1149,7 +1149,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842706-run"
 			}
 		},
-		"/users/{user_id}/password-reset/verify": {
+		"/api/v1/users/{user_id}/password-reset/verify": {
 			"put": {
 				"summary": "パスワードリセット",
 				"x-apidog-folder": "users",
@@ -1246,7 +1246,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842707-run"
 			}
 		},
-		"/users/{user_id}/email-change": {
+		"/api/v1/users/{user_id}/email-change": {
 			"post": {
 				"summary": "新しいメールアドレス受け取る。",
 				"x-apidog-folder": "users",
