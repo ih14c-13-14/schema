@@ -1575,6 +1575,9 @@
 					},
 					"authors.name": {
 						"type": "string"
+					},
+					"authors.image_path": {
+						"type": "string"
 					}
 				},
 				"x-apidog-orders": [
@@ -1588,7 +1591,8 @@
 					"arts.datetime_description",
 					"arts.closed_day_description",
 					"institutions.admission_fee_description",
-					"authors.name"
+					"authors.name",
+					"authors.image_path"
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
