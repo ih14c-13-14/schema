@@ -17,9 +17,47 @@
 		},
 		{
 			"name": "QR"
+		},
+		{
+			"name": "map"
 		}
 	],
 	"paths": {
+		"/map": {
+			"get": {
+				"summary": "住所を取得する。",
+				"x-apidog-folder": "map",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "マップに描画する住所を取得する。",
+				"tags": [
+					"map"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "住所取得OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddressResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "500",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/arts/{art_id}": {
 			"get": {
 				"summary": "作品の詳細情報を取得。",
@@ -27,7 +65,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "art_idの作品のの詳細情報を取得する。",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [
 					{
 						"name": "art_id",
@@ -82,7 +122,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "リクエストBodyの内容を登録する",
-				"tags": ["auth"],
+				"tags": [
+					"auth"
+				],
 				"parameters": [],
 				"requestBody": {
 					"content": {
@@ -146,7 +188,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "作者の「あいうえお」順にして返す。",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [],
 				"responses": {
 					"200": {
@@ -180,7 +224,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "JWTTokenを削除して会員をログアウトさせる。",
-				"tags": ["auth"],
+				"tags": [
+					"auth"
+				],
 				"parameters": [],
 				"responses": {
 					"200": {
@@ -224,7 +270,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "すべての作品を取得する。",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [],
 				"responses": {
 					"200": {
@@ -258,7 +306,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "QRを読み込み時にAR作品のオブジェクト格納URL等を返す。",
-				"tags": ["QR"],
+				"tags": [
+					"QR"
+				],
 				"parameters": [
 					{
 						"name": "art_id",
@@ -337,7 +387,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "メールアドレスとパスワードを使用してユーザーをログインします。",
-				"tags": ["auth"],
+				"tags": [
+					"auth"
+				],
 				"parameters": [],
 				"requestBody": {
 					"content": {
@@ -401,7 +453,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "年齢、都道府県、性別の変更を行う。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -466,13 +520,17 @@
 											"type": "string"
 										}
 									},
-									"x-apidog-orders": ["01H3XMFAPBV0B7J74ZE3AZ3ZN8"],
+									"x-apidog-orders": [
+										"01H3XMFAPBV0B7J74ZE3AZ3ZN8"
+									],
 									"x-apidog-refs": {
 										"01H3XMFAPBV0B7J74ZE3AZ3ZN8": {
 											"$ref": "#/components/schemas/ForbiddenResponse"
 										}
 									},
-									"x-apidog-ignore-properties": ["message"]
+									"x-apidog-ignore-properties": [
+										"message"
+									]
 								}
 							}
 						}
@@ -508,7 +566,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "ユーザIDとarts_idを渡し、作品をお気に入りする。",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [
 					{
 						"name": "art_id",
@@ -573,13 +633,17 @@
 											"type": "string"
 										}
 									},
-									"x-apidog-orders": ["01H3XMRDKSNF2JBPNF02ZFBSZ2"],
+									"x-apidog-orders": [
+										"01H3XMRDKSNF2JBPNF02ZFBSZ2"
+									],
 									"x-apidog-refs": {
 										"01H3XMRDKSNF2JBPNF02ZFBSZ2": {
 											"$ref": "#/components/schemas/ForbiddenResponse"
 										}
 									},
-									"x-apidog-ignore-properties": ["message"]
+									"x-apidog-ignore-properties": [
+										"message"
+									]
 								}
 							}
 						}
@@ -613,7 +677,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [
 					{
 						"name": "art_id",
@@ -711,7 +777,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "ユーザIDを渡し、お気に入りした作品を返す。",
-				"tags": ["arts"],
+				"tags": [
+					"arts"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -756,13 +824,17 @@
 											"type": "string"
 										}
 									},
-									"x-apidog-orders": ["01H3XMP4P91BJMA99H7XQZFWT3"],
+									"x-apidog-orders": [
+										"01H3XMP4P91BJMA99H7XQZFWT3"
+									],
 									"x-apidog-refs": {
 										"01H3XMP4P91BJMA99H7XQZFWT3": {
 											"$ref": "#/components/schemas/ForbiddenResponse"
 										}
 									},
-									"x-apidog-ignore-properties": ["message"]
+									"x-apidog-ignore-properties": [
+										"message"
+									]
 								}
 							}
 						}
@@ -798,7 +870,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "新しいパスワードに変更する。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -863,13 +937,17 @@
 											"type": "string"
 										}
 									},
-									"x-apidog-orders": ["01H3XM859BE87633TRETAJRG25"],
+									"x-apidog-orders": [
+										"01H3XM859BE87633TRETAJRG25"
+									],
 									"x-apidog-refs": {
 										"01H3XM859BE87633TRETAJRG25": {
 											"$ref": "#/components/schemas/ForbiddenResponse"
 										}
 									},
-									"x-apidog-ignore-properties": ["message"]
+									"x-apidog-ignore-properties": [
+										"message"
+									]
 								}
 							}
 						}
@@ -905,7 +983,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "1.メールアドレスを受け取り、存在すればメールアドレス宛にリンクを送信<br> - 存在しない場合は、401を返す。<br> 2.リンクにアクセスし、パスポートのリセットを行う。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [],
 				"requestBody": {
 					"content": {
@@ -979,7 +1059,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "1.tokenをチェックし一致していればメールアドレスを更新する。<br> - tokenが不正か、違うユーザーを対象にしたなら403を返す。 - tokenが正常なら201を返す。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -1074,7 +1156,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "1.tokenを受け取り、正常ならpasswordを更新する。<br> 2.不正な値なら403を返す。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -1169,7 +1253,9 @@
 				"x-apidog-status": "released",
 				"deprecated": false,
 				"description": "1.新しいメールアドレスを受け取る<br> 2.メールアドレスが既に登録されていなければメールアドレス宛にtokenを付与したリンクを送る。",
-				"tags": ["users"],
+				"tags": [
+					"users"
+				],
 				"parameters": [
 					{
 						"name": "user_id",
@@ -1234,13 +1320,17 @@
 											"type": "string"
 										}
 									},
-									"x-apidog-orders": ["01H3XM25ZMAG40RFEA5258CKFJ"],
+									"x-apidog-orders": [
+										"01H3XM25ZMAG40RFEA5258CKFJ"
+									],
 									"x-apidog-refs": {
 										"01H3XM25ZMAG40RFEA5258CKFJ": {
 											"$ref": "#/components/schemas/ForbiddenResponse"
 										}
 									},
-									"x-apidog-ignore-properties": ["message"]
+									"x-apidog-ignore-properties": [
+										"message"
+									]
 								}
 							}
 						}
@@ -1292,7 +1382,9 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["os_name"],
+				"x-apidog-orders": [
+					"os_name"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "RequestBodies"
 			},
@@ -1304,10 +1396,14 @@
 				],
 				"properties": {
 					"message": {
-						"examples": ["Not Found."]
+						"examples": [
+							"Not Found."
+						]
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-folder": "Response"
 			},
@@ -1319,10 +1415,14 @@
 				],
 				"properties": {
 					"message": {
-						"examples": ["internal server error"]
+						"examples": [
+							"internal server error"
+						]
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-folder": "Response"
 			},
@@ -1334,10 +1434,14 @@
 				],
 				"properties": {
 					"message": {
-						"examples": ["Forbidden."]
+						"examples": [
+							"Forbidden."
+						]
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-folder": "Response"
 			},
@@ -1351,7 +1455,9 @@
 						}
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
@@ -1372,7 +1478,9 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
@@ -1383,7 +1491,9 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
@@ -1450,7 +1560,9 @@
 					},
 					"arts.created_year": {
 						"type": "integer",
-						"examples": [2023]
+						"examples": [
+							2023
+						]
 					},
 					"arts.datetime_description": {
 						"type": "string"
@@ -1487,9 +1599,22 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
+			},
+			"AddressResponse": {
+				"type": "array",
+				"items": {
+					"allOf": [
+						{
+							"$ref": "#/components/schemas/AddressModel"
+						}
+					]
+				},
 				"x-apidog-folder": "Response"
 			},
 			"SignUpResponse": {
@@ -1498,7 +1623,9 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
@@ -1513,7 +1640,10 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["property", "message"],
+				"x-apidog-orders": [
+					"property",
+					"message"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
@@ -1526,14 +1656,18 @@
 						]
 					}
 				},
-				"x-apidog-orders": ["access_token"],
+				"x-apidog-orders": [
+					"access_token"
+				],
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
 			"ErrorModel": {
 				"description": "Response Error Model.",
-				"required": ["message"],
+				"required": [
+					"message"
+				],
 				"type": "object",
 				"properties": {
 					"message": {
@@ -1541,28 +1675,39 @@
 						"type": "string"
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"SuccessModel": {
 				"description": "成功",
-				"required": ["message"],
+				"required": [
+					"message"
+				],
 				"type": "object",
 				"properties": {
 					"message": {
 						"title": "message",
 						"type": "string",
-						"examples": ["成功"]
+						"examples": [
+							"成功"
+						]
 					}
 				},
-				"x-apidog-orders": ["message"],
+				"x-apidog-orders": [
+					"message"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"QRUserIdModel": {
 				"description": "QR読み込み時にuserIDとOSの名前を受け取る",
-				"required": ["user_id", "os_name"],
+				"required": [
+					"user_id",
+					"os_name"
+				],
 				"type": "object",
 				"properties": {
 					"user_id": {
@@ -1573,7 +1718,31 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["user_id", "os_name"],
+				"x-apidog-orders": [
+					"user_id",
+					"os_name"
+				],
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Schemas"
+			},
+			"AddressModel": {
+				"description": "Response Address Model.",
+				"type": "object",
+				"properties": {
+					"address": {
+						"type": "string",
+						"examples": "〒123-4567 東京都渋谷区"
+					},
+					"art_id": {
+						"type": "string",
+						"examples": "123456789"
+					}
+				},
+				"additionalProperties": false,
+				"x-apidog-orders": [
+					"address",
+					"art_id"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
@@ -1613,7 +1782,11 @@
 			},
 			"QRModel": {
 				"description": "QR Model",
-				"required": ["arts.name", "arts.address", "authors.name"],
+				"required": [
+					"arts.name",
+					"arts.address",
+					"authors.name"
+				],
 				"type": "object",
 				"properties": {
 					"arts.id": {
@@ -1633,7 +1806,9 @@
 					},
 					"arts.created_year": {
 						"type": "integer",
-						"examples": [2023]
+						"examples": [
+							2023
+						]
 					},
 					"arts.datetime_description": {
 						"type": "string"
@@ -1685,13 +1860,18 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["arts_id"],
+				"x-apidog-orders": [
+					"arts_id"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"PasswordResetModel": {
 				"description": "password reset model",
-				"required": ["token", "password"],
+				"required": [
+					"token",
+					"password"
+				],
 				"type": "object",
 				"properties": {
 					"token": {
@@ -1702,13 +1882,18 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["token", "password"],
+				"x-apidog-orders": [
+					"token",
+					"password"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"ArtUserIdSaveModel": {
 				"description": "ユーザが作品を保存する",
-				"required": ["user_id"],
+				"required": [
+					"user_id"
+				],
 				"type": "object",
 				"properties": {
 					"user_id": {
@@ -1716,13 +1901,19 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["user_id"],
+				"x-apidog-orders": [
+					"user_id"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"OthersChangeModel": {
 				"description": "other change Model",
-				"required": ["gender", "age-group", "prefectures"],
+				"required": [
+					"gender",
+					"age-group",
+					"prefectures"
+				],
 				"type": "object",
 				"properties": {
 					"gender": {
@@ -1736,13 +1927,20 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["gender", "age-group", "prefectures"],
+				"x-apidog-orders": [
+					"gender",
+					"age-group",
+					"prefectures"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"UserTokenModel": {
 				"description": "user token Model",
-				"required": ["token", "email"],
+				"required": [
+					"token",
+					"email"
+				],
 				"type": "object",
 				"properties": {
 					"token": {
@@ -1753,13 +1951,18 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["token", "email"],
+				"x-apidog-orders": [
+					"token",
+					"email"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"EmailModel": {
 				"description": "email Model",
-				"required": ["email"],
+				"required": [
+					"email"
+				],
 				"type": "object",
 				"properties": {
 					"email": {
@@ -1767,13 +1970,21 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["email"],
+				"x-apidog-orders": [
+					"email"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"SignUpModel": {
 				"description": "SignUp Model",
-				"required": ["email", "password", "age_group", "gender", "prefecture"],
+				"required": [
+					"email",
+					"password",
+					"age_group",
+					"gender",
+					"prefecture"
+				],
 				"type": "object",
 				"properties": {
 					"email": {
@@ -1805,7 +2016,10 @@
 			},
 			"SignInModel": {
 				"description": "SignIn Model",
-				"required": ["email", "password"],
+				"required": [
+					"email",
+					"password"
+				],
 				"type": "object",
 				"properties": {
 					"email": {
@@ -1816,13 +2030,19 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["email", "password"],
+				"x-apidog-orders": [
+					"email",
+					"password"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
 			"PasswordModel": {
 				"description": "password Model",
-				"required": ["new_password", "current_password"],
+				"required": [
+					"new_password",
+					"current_password"
+				],
 				"type": "object",
 				"properties": {
 					"new_password": {
@@ -1833,7 +2053,28 @@
 					}
 				},
 				"additionalProperties": false,
-				"x-apidog-orders": ["new_password", "current_password"],
+				"x-apidog-orders": [
+					"new_password",
+					"current_password"
+				],
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Schemas"
+			},
+			"addressModel": {
+				"description": "address Model",
+				"required": [
+					"address"
+				],
+				"type": "object",
+				"properties": {
+					"address": {
+						"type": "string"
+					}
+				},
+				"additionalProperties": false,
+				"x-apidog-orders": [
+					"address"
+				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			}
