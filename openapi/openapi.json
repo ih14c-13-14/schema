@@ -1607,20 +1607,14 @@
 				"x-apidog-folder": "Response"
 			},
 			"AddressResponse": {
-				"properties": {
-					"address": {
-						"type": "string"
-					},
-					"art_id": {
-						"type": "string"
-					}
+				"type": "array",
+				"items": {
+					"allOf": [
+						{
+							"$ref": "#/components/schemas/AddressModel"
+						}
+					]
 				},
-				"x-apidog-orders": [
-					"address",
-					"art_id"
-				],
-				"type": "object",
-				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
 			"SignUpResponse": {
@@ -1727,6 +1721,27 @@
 				"x-apidog-orders": [
 					"user_id",
 					"os_name"
+				],
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Schemas"
+			},
+			"AddressModel": {
+				"description": "Response Address Model.",
+				"type": "object",
+				"properties": {
+					"address": {
+						"type": "string",
+						"examples": "〒123-4567 東京都渋谷区"
+					},
+					"art_id": {
+						"type": "string",
+						"examples": "123456789"
+					}
+				},
+				"additionalProperties": false,
+				"x-apidog-orders": [
+					"address",
+					"art_id"
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
