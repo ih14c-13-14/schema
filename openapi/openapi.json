@@ -137,7 +137,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -479,7 +479,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -592,7 +592,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -703,7 +703,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -896,7 +896,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -998,7 +998,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -1085,7 +1085,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -1182,7 +1182,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
@@ -1279,7 +1279,7 @@
 					}
 				},
 				"responses": {
-					"201": {
+					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
