@@ -157,16 +157,6 @@
 							}
 						}
 					},
-					"409": {
-						"description": "409",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AlreadyEmailResponse"
-								}
-							}
-						}
-					},
 					"500": {
 						"description": "500",
 						"content": {
@@ -1345,16 +1335,6 @@
 							}
 						}
 					},
-					"409": {
-						"description": "409",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AlreadyEmailResponse"
-								}
-							}
-						}
-					},
 					"500": {
 						"description": "500",
 						"content": {
@@ -1479,19 +1459,6 @@
 				"x-apidog-folder": "Response"
 			},
 			"EmailTransmissionSuccessResponse": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"x-apidog-orders": [
-					"message"
-				],
-				"type": "object",
-				"x-apidog-ignore-properties": [],
-				"x-apidog-folder": "Response"
-			},
-			"AlreadyEmailResponse": {
 				"properties": {
 					"message": {
 						"type": "string"
