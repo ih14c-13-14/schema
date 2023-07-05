@@ -1448,6 +1448,12 @@
 			"BadRequestResponse": {
 				"type": "object",
 				"properties": {
+					"type": {
+						"type": "string",
+						"examples": [
+							"validation"
+						]
+					},
 					"message": {
 						"type": "array",
 						"items": {
