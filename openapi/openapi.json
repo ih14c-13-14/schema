@@ -142,7 +142,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/SignInResponse"
+									"$ref": "#/components/schemas/SignUpResponse"
 								}
 							}
 						}
@@ -1594,19 +1594,6 @@
 				},
 				"x-apidog-folder": "Response"
 			},
-			"SignUpResponse": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"x-apidog-orders": [
-					"message"
-				],
-				"type": "object",
-				"x-apidog-ignore-properties": [],
-				"x-apidog-folder": "Response"
-			},
 			"DtoModel": {
 				"type": "object",
 				"properties": {
@@ -1625,6 +1612,22 @@
 				"x-apidog-folder": "Schemas"
 			},
 			"SignInResponse": {
+				"properties": {
+					"access_token": {
+						"type": "string",
+						"examples": [
+							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpAVCI9.eyJzdWIiOiIxMjM0NTY3ODkwIrwinFtZSI6KivaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhoul0aWVzImpfXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+						]
+					}
+				},
+				"x-apidog-orders": [
+					"access_token"
+				],
+				"type": "object",
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
+			},
+			"SignUpResponse": {
 				"properties": {
 					"access_token": {
 						"type": "string",
