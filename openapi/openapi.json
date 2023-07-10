@@ -436,6 +436,74 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842699-run"
 			}
 		},
+		"/api/v1/users/others-change-page/choices": {
+			"get": {
+				"summary": "情報更新インプットの選択肢錬成",
+				"x-apidog-folder": "users",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "情報更新選択インプットの選択肢錬成のためのAPIです。",
+				"tags": [
+					"users"
+				],
+				"responses": {
+					"200": {
+						"description": "インプットの選択肢錬成",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserOtherChangeChoices"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "500",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/users/signup-page/choices": {
+			"get": {
+				"summary": "新規登録インプットの選択肢錬成",
+				"x-apidog-folder": "users",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "新規登録選択インプットの選択肢錬成のためのAPIです。",
+				"tags": [
+					"users"
+				],
+				"responses": {
+					"200": {
+						"description": "インプットの選択肢錬成",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserSignUpChangeChoices"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "500",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/api/v1/users/{user_id}/others-change": {
 			"put": {
 				"summary": "他情報変更",
@@ -1569,6 +1637,104 @@
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
+			},
+			"UserOtherChangeChoices": {
+				"properties": {
+					"ageChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"prefectureChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"genderChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"type": "object",
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
+			},
+			"UserSignUpChangeChoices": {
+				"properties": {
+					"ageChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"prefectureChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"genderChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"type": "object",
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
 			},
 			"SignOutResponse": {
 				"properties": {
