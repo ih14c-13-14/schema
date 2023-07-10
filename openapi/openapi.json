@@ -1616,7 +1616,7 @@
 					"access_token": {
 						"type": "string",
 						"examples": [
-							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpAVCI9.eyJzdWIiOiIxMjM0NTY3ODkwIrwinFtZSI6KivaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhoul0aWVzImpfXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiIwMTg5M2IyNy0wMzc3LTcwMDAtOTI0Yy1lNjVlNzlkYmYyNjgiLCJpYXQiOjE2ODg5MTU4MzQsImV4cCI6MTg4ODkxNTgzN30.PbW1WLIrI3b9zC3lS0kmtFiXf-6ceLIdYDwvTUcWBFc"
 						]
 					}
 				},
@@ -1632,7 +1632,7 @@
 					"access_token": {
 						"type": "string",
 						"examples": [
-							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpAVCI9.eyJzdWIiOiIxMjM0NTY3ODkwIrwinFtZSI6KivaG4gRG9lIiwiYWRtaW4iOnRydWUsImlzcyI6Imh0dHA6Ly9zZXJ2aWNlLmNvbS9hdXRoL3YxLzAiLCJleHAiOjE2MzQ1Njc4OTgsImZpbGUiOnRydWUsImF1dGhoul0aWVzImpfXX0.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiIwMTg5M2IyNy0wMzc3LTcwMDAtOTI0Yy1lNjVlNzlkYmYyNjgiLCJpYXQiOjE2ODg5MTU4MzQsImV4cCI6MTg4ODkxNTgzN30.PbW1WLIrI3b9zC3lS0kmtFiXf-6ceLIdYDwvTUcWBFc"
 						]
 					}
 				},
