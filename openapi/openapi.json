@@ -436,6 +436,174 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842699-run"
 			}
 		},
+		"/api/v1/users/{user_id}/info": {
+			"get": {
+				"summary": "ユーザー情報を取得する",
+				"x-apidog-folder": "users",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "ユーザー情報を取得する",
+				"tags": [
+					"users"
+				],
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "path",
+						"description": "ユーザID",
+						"required": true,
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"age_group": {
+											"type": "string",
+											"example": "20代"
+										},
+										"prefecture": {
+											"type": "string",
+											"example": "東京都"
+										},
+										"gender": {
+											"type": "string",
+											"example": "男性"
+										},
+										"email": {
+											"type": "string",
+											"example": "test@example.com"
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "401",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "403",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"x-apidog-orders": [
+										"01H3XMFAPBV0B7J74ZE3AZ3ZN8"
+									],
+									"x-apidog-refs": {
+										"01H3XMFAPBV0B7J74ZE3AZ3ZN8": {
+											"$ref": "#/components/schemas/ForbiddenResponse"
+										}
+									},
+									"x-apidog-ignore-properties": [
+										"message"
+									]
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "InternalServerErrorResponse",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/users/others-change-page/choices": {
+			"get": {
+				"summary": "情報更新インプットの選択肢錬成",
+				"x-apidog-folder": "users",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "情報更新選択インプットの選択肢錬成のためのAPIです。",
+				"tags": [
+					"users"
+				],
+				"responses": {
+					"200": {
+						"description": "インプットの選択肢錬成",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserOtherChangeChoices"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "500",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/users/signup-page/choices": {
+			"get": {
+				"summary": "新規登録インプットの選択肢錬成",
+				"x-apidog-folder": "users",
+				"x-apidog-status": "released",
+				"deprecated": false,
+				"description": "新規登録選択インプットの選択肢錬成のためのAPIです。",
+				"tags": [
+					"users"
+				],
+				"responses": {
+					"200": {
+						"description": "インプットの選択肢錬成",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserSignUpChangeChoices"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "500",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/api/v1/users/{user_id}/others-change": {
 			"put": {
 				"summary": "他情報変更",
@@ -1569,6 +1737,133 @@
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
+			},
+			"UserOtherChangeChoices": {
+				"properties": {
+					"currentValues": {
+						"type": "object",
+						"properties": {
+							"age_group": {
+								"type": "integer",
+								"example": 2
+							},
+							"gender": {
+								"type": "integer",
+								"example": 1
+							},
+							"prefecture": {
+								"type": "integer",
+								"example": 17
+							}
+						}
+					},
+					"age_groupChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 2
+								},
+								"name": {
+									"type": "string",
+									"example": "20代"
+								}
+							}
+						}
+					},
+					"prefectureChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 13
+								},
+								"name": {
+									"type": "string",
+									"example": "東京都"
+								}
+							}
+						}
+					},
+					"genderChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 1
+								},
+								"name": {
+									"type": "string",
+									"example": "男性"
+								}
+							}
+						}
+					}
+				},
+				"type": "object",
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
+			},
+			"UserSignUpChangeChoices": {
+				"properties": {
+					"age_groupChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 2
+								},
+								"name": {
+									"type": "string",
+									"example": "20代"
+								}
+							}
+						}
+					},
+					"prefectureChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 13
+								},
+								"name": {
+									"type": "string",
+									"example": "東京都"
+								}
+							}
+						}
+					},
+					"genderChoices": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer",
+									"example": 1
+								},
+								"name": {
+									"type": "string",
+									"example": "男性"
+								}
+							}
+						}
+					}
+				},
+				"type": "object",
+				"x-apidog-ignore-properties": [],
+				"x-apidog-folder": "Response"
 			},
 			"SignOutResponse": {
 				"properties": {
