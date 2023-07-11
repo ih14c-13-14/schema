@@ -436,7 +436,7 @@
 				"x-run-in-apidog": "https://apidog.com/web/project/370335/apis/api-3842699-run"
 			}
 		},
-		"/api/v1/users/:user_id/info": {
+		"/api/v1/users/{user_id}/info": {
 			"get": {
 				"summary": "ユーザー情報を取得する",
 				"x-apidog-folder": "users",
