@@ -74,7 +74,7 @@
 						"in": "path",
 						"description": "アートID",
 						"required": true,
-						"example": "",
+						"example": "018930b8-2823-7000-b7dd-4de72d9bb40a",
 						"schema": {
 							"type": "string"
 						}
@@ -131,8 +131,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/SignUpModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -305,17 +304,7 @@
 						"in": "path",
 						"description": "アートID",
 						"required": true,
-						"example": "",
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"name": "os_name",
-						"in": "query",
-						"description": "存在しなければiOS用, Android用二つの3Dモデルのパスを返す",
-						"required": false,
-						"example": "Android",
+						"example": "018930b8-2823-7006-ac0d-d87520829bf7",
 						"schema": {
 							"type": "string"
 						}
@@ -325,13 +314,8 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"type": "object",
-								"properties": {},
-								"x-apidog-refs": {},
-								"x-apidog-orders": [],
-								"x-apidog-ignore-properties": []
-							},
-							"example": ""
+								"$ref": "#/components/schemas/QRRequestBody"
+							}
 						}
 					}
 				},
@@ -386,8 +370,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/SignInModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -465,6 +448,12 @@
 							"application/json": {
 								"schema": {
 									"type": "object",
+									"required": [
+										"age_group",
+										"prefecture",
+										"gender",
+										"email"
+									],
 									"properties": {
 										"age_group": {
 											"type": "string",
@@ -482,7 +471,8 @@
 											"type": "string",
 											"example": "test@example.com"
 										}
-									}
+									},
+									"additionalProperties": false
 								}
 							}
 						}
@@ -502,23 +492,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XMFAPBV0B7J74ZE3AZ3ZN8"
-									],
-									"x-apidog-refs": {
-										"01H3XMFAPBV0B7J74ZE3AZ3ZN8": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -620,7 +594,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
 						"schema": {
 							"type": "string"
 						}
@@ -631,8 +605,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/OthersChangeModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -672,23 +645,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XMFAPBV0B7J74ZE3AZ3ZN8"
-									],
-									"x-apidog-refs": {
-										"01H3XMFAPBV0B7J74ZE3AZ3ZN8": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -744,8 +701,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/ArtUserIdSaveModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -785,23 +741,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XMRDKSNF2JBPNF02ZFBSZ2"
-									],
-									"x-apidog-refs": {
-										"01H3XMRDKSNF2JBPNF02ZFBSZ2": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -855,8 +795,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/ArtUserIdSaveModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -896,10 +835,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {},
-									"x-apidog-ignore-properties": [],
-									"x-apidog-orders": []
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -944,7 +880,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "01893d83-fa12-7000-9b17-00094d305a23",
 						"schema": {
 							"type": "string"
 						}
@@ -976,23 +912,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XMP4P91BJMA99H7XQZFWT3"
-									],
-									"x-apidog-refs": {
-										"01H3XMP4P91BJMA99H7XQZFWT3": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -1037,7 +957,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
 						"schema": {
 							"type": "string"
 						}
@@ -1048,8 +968,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/PasswordModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -1089,23 +1008,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XM859BE87633TRETAJRG25"
-									],
-									"x-apidog-refs": {
-										"01H3XM859BE87633TRETAJRG25": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -1150,8 +1053,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/EmailModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -1226,7 +1128,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
 						"schema": {
 							"type": "string"
 						}
@@ -1237,8 +1139,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/UserTokenModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -1323,7 +1224,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
 						"schema": {
 							"type": "string"
 						}
@@ -1334,8 +1235,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/PasswordResetModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -1420,7 +1320,7 @@
 						"in": "path",
 						"description": "ユーザID",
 						"required": true,
-						"example": "",
+						"example": "017fe537-bb13-7c35-b52a-cb5490cce7be",
 						"schema": {
 							"type": "string"
 						}
@@ -1431,8 +1331,7 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/EmailModel"
-							},
-							"example": ""
+							}
 						}
 					}
 				},
@@ -1468,27 +1367,11 @@
 						}
 					},
 					"403": {
-						"description": "自分以外のユーザー情報の更新をしようとした",
+						"description": "403",
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"x-apidog-orders": [
-										"01H3XM25ZMAG40RFEA5258CKFJ"
-									],
-									"x-apidog-refs": {
-										"01H3XM25ZMAG40RFEA5258CKFJ": {
-											"$ref": "#/components/schemas/ForbiddenResponse"
-										}
-									},
-									"x-apidog-ignore-properties": [
-										"message"
-									]
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -1523,9 +1406,13 @@
 			"QRRequestBody": {
 				"description": "QR読み込み時にOSの名前を受け取る",
 				"type": "object",
+				"required": [
+					"os_name"
+				],
 				"properties": {
 					"os_name": {
 						"type": "string",
+						"example": "android",
 						"description": "3Dモデルの出しわけに利用"
 					}
 				},
@@ -1549,6 +1436,7 @@
 						]
 					}
 				},
+				"additionalProperties": false,
 				"x-apidog-orders": [
 					"message"
 				],
@@ -1563,11 +1451,10 @@
 				],
 				"properties": {
 					"message": {
-						"examples": [
-							"internal server error"
-						]
+						"example": "internal server error"
 					}
 				},
+				"additionalProperties": false,
 				"x-apidog-orders": [
 					"message"
 				],
@@ -1590,11 +1477,16 @@
 				"x-apidog-orders": [
 					"message"
 				],
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-folder": "Response"
 			},
 			"BadRequestResponse": {
 				"type": "object",
+				"required": [
+					"type",
+					"message"
+				],
 				"properties": {
 					"type": {
 						"type": "string",
@@ -1609,6 +1501,7 @@
 						}
 					}
 				},
+				"additionalProperties": false,
 				"x-apidog-orders": [
 					"message"
 				],
@@ -1621,21 +1514,22 @@
 						"$ref": "#/components/schemas/ErrorModel"
 					}
 				],
-				"properties": {},
+				"additionalProperties": false,
 				"x-apidog-orders": [],
 				"type": "object",
 				"x-apidog-folder": "Response"
 			},
 			"EmailTransmissionSuccessResponse": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"x-apidog-orders": [
+				"type": "object",
+				"required": [
 					"message"
 				],
-				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "メールを送信しました。"
+					}
+				},
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
@@ -1677,27 +1571,49 @@
 			"ArtsDetailModel": {
 				"description": "Response Arts Detail Model.",
 				"type": "object",
+				"required": [
+					"arts.id",
+					"arts.name",
+					"arts.address",
+					"arts.image_path",
+					"arts.description",
+					"arts.is_public",
+					"arts.created_year",
+					"arts.datetime_description",
+					"arts.closed_day_description",
+					"institutions.admission_fee_description",
+					"authors.name",
+					"arts.created_at"
+				],
 				"properties": {
 					"arts.id": {
-						"type": "string"
+						"type": "string",
+						"example": "018930b8-2823-7000-b7dd-4de72d9bb40a"
 					},
 					"arts.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アーティストの図書館"
 					},
 					"arts.address": {
-						"type": "string"
+						"type": "string",
+						"example": "新潟県上越市本城町7-7"
 					},
 					"arts.image_path": {
 						"type": "array",
 						"items": {
-							"type": "string"
+							"type": "string",
+							"examples": [
+								"https://placehold.jp/150x150.png"
+							]
 						}
 					},
 					"arts.description": {
-						"type": "string"
+						"type": "string",
+						"example": "アーティストの図書館の説明"
 					},
 					"arts.is_public": {
-						"type": "boolean"
+						"type": "boolean",
+						"example": true
 					},
 					"arts.created_year": {
 						"type": "integer",
@@ -1706,19 +1622,24 @@
 						]
 					},
 					"arts.datetime_description": {
-						"type": "string"
+						"type": "string",
+						"example": "2023/4/1（金）～2023/11/30（土）(祝日を除く火水定休)日中"
 					},
 					"arts.closed_day_description": {
-						"type": "string"
+						"type": "string",
+						"example": "祝日を除く火水定休（定休日も野外作品は鑑賞可）"
 					},
 					"institutions.admission_fee_description": {
-						"type": "string"
+						"type": "string",
+						"example": "ー（期間によっては作品鑑賞パスポートや共通チケットを販売）"
 					},
 					"authors.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アルバルダム・エステル"
 					},
 					"authors.image_path": {
-						"type": "string"
+						"type": "string",
+						"example": "https://placehold.jp/150x150.png"
 					}
 				},
 				"x-apidog-orders": [
@@ -1739,9 +1660,20 @@
 				"x-apidog-folder": "Schemas"
 			},
 			"UserOtherChangeChoices": {
+				"required": [
+					"currentValues",
+					"age_groupChoices",
+					"prefectureChoices",
+					"genderChoices"
+				],
 				"properties": {
 					"currentValues": {
 						"type": "object",
+						"required": [
+							"age_group",
+							"gender",
+							"prefecture"
+						],
 						"properties": {
 							"age_group": {
 								"type": "integer",
@@ -1749,7 +1681,9 @@
 							},
 							"gender": {
 								"type": "integer",
-								"example": 1
+								"examples": [
+									1
+								]
 							},
 							"prefecture": {
 								"type": "integer",
@@ -1761,6 +1695,10 @@
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
@@ -1777,6 +1715,10 @@
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
@@ -1793,6 +1735,10 @@
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
@@ -1806,24 +1752,34 @@
 						}
 					}
 				},
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
 			"UserSignUpChangeChoices": {
+				"required": [
+					"age_groupChoices",
+					"prefectureChoices",
+					"genderChoices"
+				],
 				"properties": {
 					"age_groupChoices": {
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
-									"example": 2
+									"example": 1
 								},
 								"name": {
 									"type": "string",
-									"example": "20代"
+									"example": "10代"
 								}
 							}
 						}
@@ -1832,6 +1788,10 @@
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
@@ -1848,6 +1808,10 @@
 						"type": "array",
 						"items": {
 							"type": "object",
+							"required": [
+								"id",
+								"name"
+							],
 							"properties": {
 								"id": {
 									"type": "integer",
@@ -1861,19 +1825,25 @@
 						}
 					}
 				},
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
 			"SignOutResponse": {
+				"required": [
+					"message"
+				],
 				"properties": {
 					"message": {
-						"type": "string"
+						"type": "string",
+						"example": "ログアウトしました。"
 					}
 				},
 				"x-apidog-orders": [
 					"message"
 				],
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
@@ -1891,12 +1861,18 @@
 			},
 			"DtoModel": {
 				"type": "object",
+				"required": [
+					"property",
+					"message"
+				],
 				"properties": {
 					"property": {
-						"type": "string"
+						"type": "string",
+						"examples": "email"
 					},
 					"message": {
-						"type": "string"
+						"type": "string",
+						"example": "email形式で入力してください。"
 					}
 				},
 				"x-apidog-orders": [
@@ -1907,6 +1883,9 @@
 				"x-apidog-folder": "Schemas"
 			},
 			"SignInResponse": {
+				"required": [
+					"access_token"
+				],
 				"properties": {
 					"access_token": {
 						"type": "string",
@@ -1918,11 +1897,15 @@
 				"x-apidog-orders": [
 					"access_token"
 				],
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
 			},
 			"SignUpResponse": {
+				"required": [
+					"access_token"
+				],
 				"properties": {
 					"access_token": {
 						"type": "string",
@@ -1934,6 +1917,7 @@
 				"x-apidog-orders": [
 					"access_token"
 				],
+				"additionalProperties": false,
 				"type": "object",
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Response"
@@ -1946,8 +1930,8 @@
 				"type": "object",
 				"properties": {
 					"message": {
-						"title": "error message",
-						"type": "string"
+						"type": "string",
+						"example": "Unauthorized"
 					}
 				},
 				"x-apidog-orders": [
@@ -1971,6 +1955,7 @@
 						]
 					}
 				},
+				"additionalProperties": false,
 				"x-apidog-orders": [
 					"message"
 				],
@@ -1989,7 +1974,8 @@
 						"type": "string"
 					},
 					"os_name": {
-						"type": "string"
+						"type": "string",
+						"examples": "android"
 					}
 				},
 				"additionalProperties": false,
@@ -2003,14 +1989,18 @@
 			"AddressModel": {
 				"description": "Response Address Model.",
 				"type": "object",
+				"required": [
+					"address",
+					"art_id"
+				],
 				"properties": {
 					"address": {
 						"type": "string",
-						"examples": "〒123-4567 東京都渋谷区"
+						"example": "〒123-4567 東京都渋谷区"
 					},
 					"art_id": {
 						"type": "string",
-						"examples": "123456789"
+						"example": "123456789"
 					}
 				},
 				"additionalProperties": false,
@@ -2024,24 +2014,38 @@
 			"ArtsModel": {
 				"description": "Response Arts Model.",
 				"type": "object",
+				"required": [
+					"arts.id",
+					"arts.name",
+					"arts.address",
+					"arts.image_path",
+					"authors.name"
+				],
 				"properties": {
 					"arts.id": {
-						"type": "string"
+						"type": "string",
+						"example": "018930b8-2823-7000-b7dd-4de72d9bb40a"
 					},
 					"arts.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アーティストの図書館"
 					},
 					"arts.address": {
-						"type": "string"
+						"type": "string",
+						"example": "新潟県上越市本城町7-7"
 					},
 					"arts.image_path": {
 						"type": "array",
 						"items": {
-							"type": "string"
+							"type": "string",
+							"examples": [
+								"https://placehold.jp/150x150.png"
+							]
 						}
 					},
 					"authors.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アルバルダム・エステル"
 					}
 				},
 				"additionalProperties": false,
@@ -2058,9 +2062,19 @@
 			"QRModel": {
 				"description": "QR Model",
 				"required": [
+					"arts.id",
 					"arts.name",
 					"arts.address",
-					"authors.name"
+					"arts.description",
+					"arts.is_public",
+					"arts.created_year",
+					"arts.datetime_description",
+					"arts.closed_day_description",
+					"institutions.admission_fee_description",
+					"authors.name",
+					"poster_path",
+					"glb_path",
+					"reality_path"
 				],
 				"type": "object",
 				"properties": {
@@ -2150,10 +2164,12 @@
 				"type": "object",
 				"properties": {
 					"token": {
-						"type": "string"
+						"type": "string",
+						"example": "token"
 					},
 					"password": {
-						"type": "string"
+						"type": "string",
+						"example": "Passw0rd"
 					}
 				},
 				"additionalProperties": false,
@@ -2172,7 +2188,8 @@
 				"type": "object",
 				"properties": {
 					"user_id": {
-						"type": "string"
+						"type": "string",
+						"example": "01893f1d-ad38-7000-bb26-f067d63c1708"
 					}
 				},
 				"additionalProperties": false,
@@ -2186,26 +2203,29 @@
 				"description": "other change Model",
 				"required": [
 					"gender",
-					"age-group",
-					"prefectures"
+					"age_group",
+					"prefecture"
 				],
 				"type": "object",
 				"properties": {
 					"gender": {
-						"type": "integer"
+						"type": "integer",
+						"example": 1
 					},
-					"age-group": {
-						"type": "integer"
+					"age_group": {
+						"type": "integer",
+						"example": 2
 					},
-					"prefectures": {
-						"type": "integer"
+					"prefecture": {
+						"type": "integer",
+						"example": 13
 					}
 				},
 				"additionalProperties": false,
 				"x-apidog-orders": [
 					"gender",
-					"age-group",
-					"prefectures"
+					"age_group",
+					"prefecture"
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
@@ -2219,10 +2239,12 @@
 				"type": "object",
 				"properties": {
 					"token": {
-						"type": "string"
+						"type": "string",
+						"example": "token"
 					},
 					"email": {
-						"type": "string"
+						"type": "string",
+						"example": "sample@example.com"
 					}
 				},
 				"additionalProperties": false,
@@ -2241,7 +2263,8 @@
 				"type": "object",
 				"properties": {
 					"email": {
-						"type": "string"
+						"type": "string",
+						"example": "test@example.com"
 					}
 				},
 				"additionalProperties": false,
@@ -2263,19 +2286,24 @@
 				"type": "object",
 				"properties": {
 					"email": {
-						"type": "string"
+						"type": "string",
+						"example": "test@example.com"
 					},
 					"password": {
-						"type": "string"
+						"type": "string",
+						"example": "Password123"
 					},
 					"age_group": {
-						"type": "integer"
+						"type": "integer",
+						"example": 2
 					},
 					"gender": {
-						"type": "integer"
+						"type": "integer",
+						"example": 1
 					},
 					"prefecture": {
-						"type": "integer"
+						"type": "integer",
+						"example": 13
 					}
 				},
 				"additionalProperties": false,
@@ -2298,10 +2326,12 @@
 				"type": "object",
 				"properties": {
 					"email": {
-						"type": "string"
+						"type": "string",
+						"example": "test@example.com"
 					},
 					"password": {
-						"type": "string"
+						"type": "string",
+						"example": "Password123"
 					}
 				},
 				"additionalProperties": false,
@@ -2321,10 +2351,12 @@
 				"type": "object",
 				"properties": {
 					"new_password": {
-						"type": "string"
+						"type": "string",
+						"example": "Password12345"
 					},
 					"current_password": {
-						"type": "string"
+						"type": "string",
+						"example": "Password123"
 					}
 				},
 				"additionalProperties": false,
