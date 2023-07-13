@@ -1743,6 +1743,7 @@
 					"authors.image_path",
 					"is_favorited"
 				],
+				"additionalProperties": false,
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
