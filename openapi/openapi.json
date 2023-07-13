@@ -91,6 +91,26 @@
 							}
 						}
 					},
+					"401": {
+						"description": "401",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "403",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ForbiddenResponse"
+								}
+							}
+						}
+					},
 					"404": {
 						"description": "404",
 						"content": {
@@ -192,6 +212,26 @@
 							}
 						}
 					},
+					"401": {
+						"description": "401",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "403",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ForbiddenResponse"
+								}
+							}
+						}
+					},
 					"500": {
 						"description": "500",
 						"content": {
@@ -270,6 +310,26 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/ArtsResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "401",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "403",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -527,6 +587,26 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/UserOtherChangeChoices"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "401",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "403",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ForbiddenResponse"
 								}
 							}
 						}
@@ -1577,13 +1657,15 @@
 					"arts.address",
 					"arts.image_path",
 					"arts.description",
-					"arts.is_public",
 					"arts.created_year",
+					"arts.is_public",
 					"arts.datetime_description",
 					"arts.closed_day_description",
+					"arts.created_at",
 					"institutions.admission_fee_description",
 					"authors.name",
-					"arts.created_at"
+					"authors.image_path",
+					"is_favorited"
 				],
 				"properties": {
 					"arts.id": {
@@ -1640,6 +1722,10 @@
 					"authors.image_path": {
 						"type": "string",
 						"example": "https://placehold.jp/150x150.png"
+					},
+					"is_favorited": {
+						"type": "boolean",
+						"example": false
 					}
 				},
 				"x-apidog-orders": [
@@ -1654,8 +1740,10 @@
 					"arts.closed_day_description",
 					"institutions.admission_fee_description",
 					"authors.name",
-					"authors.image_path"
+					"authors.image_path",
+					"is_favorited"
 				],
+				"additionalProperties": false,
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
 			},
@@ -1868,7 +1956,7 @@
 				"properties": {
 					"property": {
 						"type": "string",
-						"examples": "email"
+						"example": "email"
 					},
 					"message": {
 						"type": "string",
@@ -1971,11 +2059,12 @@
 				"type": "object",
 				"properties": {
 					"user_id": {
-						"type": "string"
+						"type": "string",
+						"example": "01893f1d-ad38-7000-bb26-f067d63c1708"
 					},
 					"os_name": {
 						"type": "string",
-						"examples": "android"
+						"example": "android"
 					}
 				},
 				"additionalProperties": false,
@@ -1996,7 +2085,7 @@
 				"properties": {
 					"address": {
 						"type": "string",
-						"example": "〒123-4567 東京都渋谷区"
+						"example": "新潟県上越市本城町7-7"
 					},
 					"art_id": {
 						"type": "string",
@@ -2019,7 +2108,9 @@
 					"arts.name",
 					"arts.address",
 					"arts.image_path",
-					"authors.name"
+					"arts.is_public",
+					"authors.name",
+					"is_favorited"
 				],
 				"properties": {
 					"arts.id": {
@@ -2035,17 +2126,17 @@
 						"example": "新潟県上越市本城町7-7"
 					},
 					"arts.image_path": {
-						"type": "array",
-						"items": {
-							"type": "string",
-							"examples": [
-								"https://placehold.jp/150x150.png"
-							]
-						}
+						"type": "string",
+						"example": "https://placehold.jp/150x150.png"
 					},
 					"authors.name": {
 						"type": "string",
 						"example": "アルバルダム・エステル"
+					},
+					"is_favorited": {
+						"type": "boolean",
+						"nullable": true,
+						"example": "false"
 					}
 				},
 				"additionalProperties": false,
@@ -2054,7 +2145,8 @@
 					"arts.name",
 					"arts.address",
 					"arts.image_path",
-					"authors.name"
+					"authors.name",
+					"is_favorited"
 				],
 				"x-apidog-ignore-properties": [],
 				"x-apidog-folder": "Schemas"
@@ -2066,7 +2158,6 @@
 					"arts.name",
 					"arts.address",
 					"arts.description",
-					"arts.is_public",
 					"arts.created_year",
 					"arts.datetime_description",
 					"arts.closed_day_description",
@@ -2079,46 +2170,52 @@
 				"type": "object",
 				"properties": {
 					"arts.id": {
-						"type": "string"
+						"type": "string",
+						"example": "018930b8-2823-7000-b7dd-4de72d9bb40a"
 					},
 					"arts.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アーティストの図書館"
 					},
 					"arts.address": {
-						"type": "string"
+						"type": "string",
+						"example": "新潟県上越市本城町7-7"
 					},
 					"arts.description": {
-						"type": "string"
-					},
-					"arts.is_public": {
-						"type": "boolean"
+						"type": "string",
+						"example": "アーティストの図書館の説明"
 					},
 					"arts.created_year": {
 						"type": "integer",
-						"examples": [
-							2023
-						]
+						"example": 2023
 					},
 					"arts.datetime_description": {
-						"type": "string"
+						"type": "string",
+						"example": "2023/4/1（金）～2023/11/30（土）(祝日を除く火水定休)日中"
 					},
 					"arts.closed_day_description": {
-						"type": "string"
+						"type": "string",
+						"example": "祝日を除く火水定休（定休日も野外作品は鑑賞可）"
 					},
 					"institutions.admission_fee_description": {
-						"type": "string"
+						"type": "string",
+						"example": "ー（期間によっては作品鑑賞パスポートや共通チケットを販売）"
 					},
 					"authors.name": {
-						"type": "string"
+						"type": "string",
+						"example": "アルバルダム・エステル"
 					},
 					"poster_path": {
-						"type": "string"
+						"type": "string",
+						"example": "https://s3"
 					},
 					"glb_path": {
-						"type": "string"
+						"type": "string",
+						"example": "https://s3"
 					},
 					"reality_path": {
-						"type": "string"
+						"type": "string",
+						"example": "https://s3"
 					}
 				},
 				"additionalProperties": false,
