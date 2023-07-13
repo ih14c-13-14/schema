@@ -1956,7 +1956,7 @@
 				"properties": {
 					"property": {
 						"type": "string",
-						"examples": "email"
+						"example": "email"
 					},
 					"message": {
 						"type": "string",
@@ -2059,11 +2059,12 @@
 				"type": "object",
 				"properties": {
 					"user_id": {
-						"type": "string"
+						"type": "string",
+						"example": "01893f1d-ad38-7000-bb26-f067d63c1708"
 					},
 					"os_name": {
 						"type": "string",
-						"examples": "android"
+						"example": "android"
 					}
 				},
 				"additionalProperties": false,
@@ -2186,7 +2187,7 @@
 					},
 					"arts.created_year": {
 						"type": "integer",
-						"examples": 2023
+						"example": 2023
 					},
 					"arts.datetime_description": {
 						"type": "string",
