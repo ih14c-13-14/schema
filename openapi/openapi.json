@@ -2125,13 +2125,8 @@
 						"example": "新潟県上越市本城町7-7"
 					},
 					"arts.image_path": {
-						"type": "array",
-						"items": {
-							"type": "string",
-							"examples": [
-								"https://placehold.jp/150x150.png"
-							]
-						}
+						"type": "string",
+						"example": "https://placehold.jp/150x150.png"
 					},
 					"authors.name": {
 						"type": "string",
