@@ -2085,7 +2085,7 @@
 				"properties": {
 					"address": {
 						"type": "string",
-						"example": "〒123-4567 東京都渋谷区"
+						"example": "新潟県上越市本城町7-7"
 					},
 					"art_id": {
 						"type": "string",
